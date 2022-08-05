@@ -21,7 +21,7 @@ const employeesRouter=require('./routes/api/employee');
 const userRouter=require('./routes/api/user');
 const corsOptions = require("./config/corsOptions");
 const credentials = require("./middlewares/credentials");
-const { verifyToken } = require('./middlewares/verifyToken');
+const  verifyToken = require('./middlewares/verifyToken');
 
 
 //Hanlde optiond credentials check -before CORS
@@ -57,7 +57,7 @@ app.use('/api/logout',logoutRouter)
 
 app.use(verifyToken);
 app.use('/api/employees',employeesRouter );
-app.use('/users', userRouter);
+app.use('/api/users', userRouter);
 
 app.use(errorHandler)
 
