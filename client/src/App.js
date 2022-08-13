@@ -24,9 +24,7 @@ function App() {
 
         <Route path="login" element={<Login/>}/>
 
-         {/* ========= unauthorized user page ============ */}
-        
-        <Route path="unauthorized" element={<Unauthorized/>} />
+      
         
         {/* ========= register page ============ */}
 
@@ -38,6 +36,10 @@ function App() {
         {/* ========= products page ============ */}
         {/* ========= cart page ============ */}
         {/* ========= order page ============ */}
+
+           {/* ========= unauthorized user page ============ */}
+        
+         <Route path="unauthorized" element={<Unauthorized/>} />
 
 
         {/* ========= protected admin pages ============ */}

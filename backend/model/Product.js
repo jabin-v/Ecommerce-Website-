@@ -44,6 +44,35 @@ const productSchema=new Schema({
     images: {
         type: Array,
     },
+   
+    availableSizes:{
+        type: Array,
+
+    },
+    brand:{
+        type:String
+       },
+    colors: { type: Array },
+    ratingsAverage:{
+        type:Number,
+        default:4.5
+       },
+       ratingsQuantity:{
+        type:Number,
+        default:0
+       },
+   
+       brand:{
+        type:String
+       },
+       activity:{
+        type:Array     
+
+    },
+    isFeatured:{
+        type:Boolean,
+        default:false
+    },
     updatedAt:Date,
    
 
