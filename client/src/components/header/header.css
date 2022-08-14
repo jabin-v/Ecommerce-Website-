@@ -1,0 +1,147 @@
+
+/* header li{
+    display:flex;
+    position:relative;
+    line-height:inherit;
+} */
+
+.header-top .wrapper{
+    font-size:var(--font-small);
+    font-weight:var(--fw3);
+    justify-content:space-between;
+    line-height:42px;
+}
+
+.header-top .wrapper ul{
+    gap:2em;
+}
+.header-top li{
+    position:relative;
+}
+.trigger{
+    font-size:1.5em;
+    display:flex;
+    padding:0.25em;
+    margin-right:0.5em;
+}
+.header-list{
+    position:relative;
+}
+
+.logo a{
+    font-size:1.75em;
+    position:relative;
+    font-weight:var(--fw8);
+    display:flex;
+    
+    padding-left:0.75em;
+    margin-right:2em;
+    margin-top:-7px;
+}
+
+.header-nav nav > ul {
+    /* line-height:100px; */
+    gap:2em;
+}
+
+.fly-item{
+    position:absolute;
+    height:16px;
+    font-weight:var(--font-smaller);
+    padding:3px;
+    text-align:center;
+    line-height:10px;
+    color:var(--white-color)
+}
+
+.header-nav .right{
+    position:relative;
+    margin-left:auto;
+
+}
+
+
+.icon-large{
+    font-size:1.75em;
+    padding:0 0.75em 0 0 ;
+}
+
+.mobile-hide{
+    display:none;
+}
+.header-nav{
+    padding:0.5em 0;
+    margin-bottom:1.5em;
+    border-bottom:1px solid var(--border-color)
+}
+.menu-header > ul{
+    display:flex;
+    /* align-items:center; */
+    /* position:relative; */
+}
+.menu-header > ul > li >span{
+    cursor:pointer;
+    padding:15px;
+}
+
+.menu-header > ul > li >span:hover{
+    color:var( --secondary-color)
+}
+
+.menu-header > ul > li > ul {
+    position:absolute;
+    background:var(--light-bg-color) ;
+    left:0;
+    right:0;
+    top:35px;
+    display:none;
+    border:1px solid #FCFCFC ;
+    margin:0 20px;
+    z-index:100;
+   
+
+}
+
+.menu-header > ul > li:hover ul{
+    display:block;
+  
+
+}
+.menu-header > ul > li > ul >li{
+   margin:0 20px;
+}
+.menu-header > ul > li > ul >li{
+    float:left;
+    margin:10px;
+}
+
+.menu-header > ul > li > ul >li >a {
+    font-weight:bold;
+}
+
+.menu-header > ul > li > ul >li a{
+    padding:1px;
+}
+
+
+
+
+
+
+
+@media screen and (min-width : 992px){
+    .container{
+        padding:0 2em;
+    }
+    .desktop-hide{
+        display:none;
+    }
+    .mobile-hide{
+        display:block;
+    }
+}
+
+
+
+/* responsive */
+

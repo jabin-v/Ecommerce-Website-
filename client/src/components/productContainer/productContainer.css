@@ -1,0 +1,12 @@
+@media (min-width: 1024px) {
+
+    .product-container .container {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+
+}

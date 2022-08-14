@@ -2,12 +2,15 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import {Route,Routes} from "react-router-dom"
 import Layout from "./components/Layout";
+import Home from './pages/home'
+import 'remixicon/fonts/remixicon.css'
 
 import Public from "./components/Public";
 import Private from "./components/Private";
 import Unauthorized from "./components/Unauthorized";
 import RequireAuth from "./features/auth/RequireAuth";
 import UsersList from "./features/users/UsersList";
+import './app.css'
 
 
 function App() {
@@ -18,7 +21,7 @@ function App() {
 
 
         {/* ========= home page ============ */}
-         <Route index element={<Public/>}/>
+         <Route index element={<Home/>}/>
 
         {/* ========= login page ============ */}
 

@@ -1,0 +1,29 @@
+
+.product-minimal { margin-bottom: 30px; }
+
+@media(min-width:768px){
+   .product-minimal{
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       gap: 20px;
+       
+    
+     }
+ }
+
+@media (min-width: 1024px) {
+
+.product-box { min-width: calc(75% - 15px); }
+.product-minimal { margin-bottom: 20px; }
+
+
+ }
+
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
+import './login.css'
 
 import {useDispatch} from 'react-redux';
 import {setCredentials} from '../../features/auth/authSlice';
@@ -68,7 +69,7 @@ const Login = () => {
 
     return (
       
-                <section>
+                <section className='loginwrapper'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit} >
