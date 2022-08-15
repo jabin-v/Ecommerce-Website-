@@ -1,51 +1,56 @@
 import './style.css'
 import image1 from '../../images/products/jacket-1.jpg'
 import image2 from '../../images/products/jacket-2.jpg'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+
 
 import React from 'react'
 
 const ShowCaseCard = () => {
   return (
-    <div class="showcase">
+    <div className="showcase">
 
-                <div class="showcase-banner">
+                <div className="showcase-banner">
+                  <img src={image1} alt="Mens Winter Leathers Jackets" width="300" class="product-img default"/>
+                  <img src={image2} alt="Mens Winter Leathers Jackets" width="300" class="product-img hover"/>
 
-                  <img src={image1}/>
-                  {/* <img src={image2}/> */}
+                  {/* <p className="showcase-badge">15%</p> */}
 
-                  <p class="showcase-badge">15%</p>
+<div className="showcase-actions">
 
-                  <div class="showcase-actions">
+<div className="btn-action">
+<FavoriteBorderIcon/>
+</div>
 
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
+<div className="btn-action">
+  <AddShoppingCartIcon/>
+</div>
 
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>
+<div className="btn-action">
+  <RemoveRedEyeIcon/>
+</div>
 
-                    <button class="btn-action">
-                      <ion-icon name="repeat-outline"></ion-icon>
-                    </button>
+{/* <button className="btn-action">
+  <ion-icon name="repeat-outline"></ion-icon>
+</button> */}
 
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
 
-                  </div>
+
+</div>
 
                 </div>
 
-                <div class="showcase-content">
+                <div className="showcase-content">
 
-                  <a href="#" class="showcase-category">jacket</a>
+                  <a href="#" className="showcase-category">jacket</a>
 
                   <a href="#">
-                    <h3 class="showcase-title">Mens Winter Leathers Jackets</h3>
+                    <h3 className="showcase-title">Mens Winter Leathers Jackets</h3>
                   </a>
 
-                  <div class="showcase-rating">
+                  <div className="showcase-rating">
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
@@ -53,8 +58,8 @@ const ShowCaseCard = () => {
                     <ion-icon name="star-outline"></ion-icon>
                   </div>
 
-                  <div class="price-box">
-                    <p class="price">$48.00</p>
+                  <div className="price-box">
+                    <p className="price">$48.00</p>
                     <del>$75.00</del>
                   </div>
 

@@ -5,19 +5,19 @@ import './productMinimal.css'
 const ProductMinimal = (props) => {
   return (
    
-      <div class="product-showcase">
+      <div className="product-showcase">
 
         
-      <h2 class="title">{props.title}</h2>   
-      <div class="showcase-wrapper has-scrollbar">
-      <div class="showcase-container">
+      <h2 className="title">{props.title}</h2>   
+      <div className="showcase-wrapper has-scrollbar">
+      <div className="showcase-container">
      
        <ProdcuctCard/>
        <ProdcuctCard/>
        <ProdcuctCard/>
        <ProdcuctCard/>
       </div>
-      <div class="showcase-container">
+      <div className="showcase-container">
       <ProdcuctCard/>
        <ProdcuctCard/>
        <ProdcuctCard/>

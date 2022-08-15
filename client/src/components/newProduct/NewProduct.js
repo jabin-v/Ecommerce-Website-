@@ -4,11 +4,15 @@ import "./newProduct.css"
 
 const NewProduct = () => {
   return (
-    <div class="product-main">
+    <div className="product-main">
 
-            <h2 class="title">New Products</h2>
+            <h2 className="title">New Products</h2>
 
-            <div class="product-grid">
+            <div className="product-grid">
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
             <ShowCaseCard/>
 
             </div>

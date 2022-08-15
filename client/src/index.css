@@ -242,10 +242,12 @@ h3{
     font-size:1.2em;
     font-weight:var(--fw7)
 }
+span { display: inline-block; }
 h4{
     font-size:1em;
     font-weight:var(--fw6)
 }
+/* img, ion-icon, button, a { display: block; } */
 
 body::-webkit-scrollbar { width: 15px; }
 
@@ -352,4 +354,5 @@ color:var(--secondary-color)
   border-bottom: 1px solid var(--cultured);
   margin-bottom: 30px;
 }
+
 

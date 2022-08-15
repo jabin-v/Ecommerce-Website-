@@ -11,6 +11,8 @@ import Unauthorized from "./components/Unauthorized";
 import RequireAuth from "./features/auth/RequireAuth";
 import UsersList from "./features/users/UsersList";
 import './app.css'
+import ProductDetail from "./pages/pooductDetail.js";
+
 
 
 function App() {
@@ -22,6 +24,10 @@ function App() {
 
         {/* ========= home page ============ */}
          <Route index element={<Home/>}/>
+         <Route path="category/:categoryId" element={<ProductDetail/>}/>
+
+
+
 
         {/* ========= login page ============ */}
 

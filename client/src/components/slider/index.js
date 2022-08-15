@@ -4,9 +4,9 @@ import banner1 from '../../images/banner-1.jpg'
 import banner2 from '../../images/banner-1.jpg'
 import banner3 from '../../images/banner-1.jpg'
 
-// <p class="banner-subtitle">Trending item</p>
+// <p className="banner-subtitle">Trending item</p>
 
-// <h2 class="banner-title">Women's latest fashion sale</h2>
+// <h2 className="banner-title">Women's latest fashion sale</h2>
 
 const Sider = () => {
     const bannerData=[
@@ -34,28 +34,28 @@ const Sider = () => {
 
   return (
     <div>
-         <div class="banner">
+         <div className="banner">
 
-<div class="container">
+<div className="container">
 
-  <div class="slider-container has-scrollbar">
+  <div className="slider-container has-scrollbar">
 
 
 
 {
       bannerData.map((banner)=>(
-        <div class="slider-item">
+        <div className="slider-item" key={banner.smallheading}>
     
-          <img src={banner.image} alt="women's latest fashion sale" class="banner-img"/>
+          <img src={banner.image} alt="women's latest fashion sale" className="banner-img"/>
     
-          <div class="banner-content">
+          <div className="banner-content">
     
-            <p class="banner-subtitle">{banner.smallheading}</p>
+            <p className="banner-subtitle">{banner.smallheading}</p>
     
-            <h2 class="banner-title">{banner.mainheading}</h2>
+            <h2 className="banner-title">{banner.mainheading}</h2>
     
     
-            <a href="#" class="banner-btn">Shop now</a>
+            <a href="#" className="banner-btn">Shop now</a>
     
           </div>
     

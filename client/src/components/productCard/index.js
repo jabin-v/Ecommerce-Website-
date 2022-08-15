@@ -5,22 +5,22 @@ import image from '../../images/products/jacket-1.jpg'
 
 const ProductMinimalCard = (props) => {
   return (
-    <div class="showcase">
+    <div className="showcase">
 
-                    <a href="#" class="showcase-img-box">
-                      <img src={image} alt="relaxed short full sleeve t-shirt" width="70" class="showcase-img"/>
+                    <a href="#" className="showcase-img-box">
+                      <img src={image} alt="relaxed short full sleeve t-shirt" width="70" className="showcase-img"/>
                     </a>
 
-                    <div class="showcase-content">
+                    <div className="showcase-content">
 
                       <a href="#">
-                        <h4 class="showcase-title">Relaxed Short full Sleeve T-Shirt</h4>
+                        <h4 className="showcase-title">Relaxed Short full Sleeve T-Shirt</h4>
                       </a>
 
-                      <a href="#" class="showcase-category">Clothes</a>
+                      <a href="#" className="showcase-category">Clothes</a>
 
-                      <div class="price-box">
-                        <p class="price">$45.00</p>
+                      <div className="price-box">
+                        <p className="price">$45.00</p>
                         <del>$12.00</del>
                       </div>
 
