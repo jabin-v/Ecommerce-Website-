@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from '../../components/footer'
 import Header from '../../components/header'
-import image1 from '../..//images/products/sports-1.jpg'
+import image1 from '../../images/products/sports-1.jpg'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import './style.css'

@@ -7,13 +7,13 @@ import './style.css'
 const ReviewCard = () => {
   return (
    <>
-   <div class="review card-1">
+   <div className="review card-1">
      
       <Rating name="disabled" value={5} disabled />
      
-      <h2 class="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-      <p class="card__apply">
-        <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+      <h2 className="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+      <p className="card__apply">
+        <a className="card__link" href="#">Apply Now <i className="fas fa-arrow-right"></i></a>
       </p>
     </div>
     

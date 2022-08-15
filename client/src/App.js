@@ -12,6 +12,7 @@ import RequireAuth from "./features/auth/RequireAuth";
 import UsersList from "./features/users/UsersList";
 import './app.css'
 import ProductDetail from "./pages/pooductDetail.js";
+import Cart from "./pages/cart/Cart";
 
 
 
@@ -24,7 +25,10 @@ function App() {
 
         {/* ========= home page ============ */}
          <Route index element={<Home/>}/>
+         <Route path="/user/cart" element={<Cart/>}/>
+
          <Route path="category/:categoryId" element={<ProductDetail/>}/>
+         
 
 
 

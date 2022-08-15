@@ -13,8 +13,8 @@ const ShowCaseCard = () => {
     <div className="showcase">
 
                 <div className="showcase-banner">
-                  <img src={image1} alt="Mens Winter Leathers Jackets" width="300" class="product-img default"/>
-                  <img src={image2} alt="Mens Winter Leathers Jackets" width="300" class="product-img hover"/>
+                  <img src={image1} alt="Mens Winter Leathers Jackets" width="300" className="product-img default"/>
+                  <img src={image2} alt="Mens Winter Leathers Jackets" width="300" className="product-img hover"/>
 
                   {/* <p className="showcase-badge">15%</p> */}
 
