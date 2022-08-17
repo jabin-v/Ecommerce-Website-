@@ -10,9 +10,10 @@ import Private from "./components/Private";
 import Unauthorized from "./components/Unauthorized";
 import RequireAuth from "./features/auth/RequireAuth";
 import UsersList from "./features/users/UsersList";
-import './app.css'
+import './App.css'
 import ProductDetail from "./pages/pooductDetail.js";
 import Cart from "./pages/cart/Cart";
+import Search from "./pages/serach";
 
 
 
@@ -26,6 +27,7 @@ function App() {
         {/* ========= home page ============ */}
          <Route index element={<Home/>}/>
          <Route path="/user/cart" element={<Cart/>}/>
+         <Route path="/search" element={<Search/>}/>
 
          <Route path="category/:categoryId" element={<ProductDetail/>}/>
          

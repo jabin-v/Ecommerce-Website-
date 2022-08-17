@@ -49,13 +49,18 @@ const productSchema=new Schema({
         type: Array,
 
     },
+
+   
     brand:{
         type:String
        },
     colors: { type: Array },
     ratingsAverage:{
         type:Number,
-        default:4.5
+        default:4.5,
+        min:[1,"RAting must be above 1.0"],
+        min:[5,"RAting must be below 5.0"],
+        set:val=>Math.round(val * 10 )/10
        },
        ratingsQuantity:{
         type:Number,
@@ -73,11 +78,24 @@ const productSchema=new Schema({
         type:Boolean,
         default:false
     },
+   
     updatedAt:Date,
    
 
 
-} ,{ timestamps: true })
+} )
+
+
+productSchema.set('toObject', { virtuals: true })
+productSchema.set('toJSON', { virtuals: true })
+
+productSchema.index({price:1,ratingsAverage:-1})
+
+productSchema.virtual('reviews',{
+    ref:"Review",
+    foreignField:'product',
+    localField:"_id"
+})
 
 
 module.exports = mongoose.model('Product', productSchema);

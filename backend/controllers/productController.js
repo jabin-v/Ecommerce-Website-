@@ -6,7 +6,20 @@ const APIFeatures = require("../util/APIFeatures");
 //-----------------product create--------------------------//
 
 const createProduct = catchAsync(async (req, res, next) => {
-  const { name, price, category, description, response, quantity,sizes,brand,colors,offers ,activity,isFeatured} = req.body;
+  const {
+    name,
+    price,
+    category,
+    description,
+    response,
+    quantity,
+    sizes,
+    brand,
+    colors,
+    offers,
+    activity,
+    isFeatured,
+  } = req.body;
   console.log("controller", response);
 
   const productObj = {
@@ -17,13 +30,12 @@ const createProduct = catchAsync(async (req, res, next) => {
     category,
     description,
     colors,
-    availableSizes:sizes,
+    availableSizes: sizes,
     quantity,
     brand,
     activity,
     offers,
     isFeatured,
-
 
     updatedAt: new Date(),
   };
@@ -37,14 +49,15 @@ const createProduct = catchAsync(async (req, res, next) => {
 
 //-----------------product create--------------------------//
 
-
 //---------Admin Product request--------------------//
 
 const getAllProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find().populate({
-    path: "category",
-    select: "-__v -parentId ",
-  });
+  const products = await Product.find()
+    .populate({
+      path: "category",
+      select: "-__v -parentId ",
+    })
+    .sort("-createdAt");
 
   res.status(201).json({
     status: "success",
@@ -56,124 +69,46 @@ const getAllProducts = catchAsync(async (req, res, next) => {
 
 //============ frontend customer===============================//
 
-
-
-
-
-
-const aliasTopProduct=catchAsync(async(req,res,next)=>{
-
-req.query.limit="8";
-req.query.sort ="-ratingsAverage,price";
-req.query.fields="name,price,ratingsAverage,images";
-next();
-
-})
-const aliasFeaturedProduct=catchAsync(async(req,res,next)=>{
-req.query.isFeatured="true";
-req.query.limit="8";
-req.query.sort ="-ratingsAverage,price";
-req.query.fields="name,price,ratingsAverage,images";
-next();
-
-})
-
-
-
-
-
+const aliasTopCheapProduct = catchAsync(async (req, res, next) => {
+  req.query.limit = "8";
+  req.query.sort = "-ratingsAverage,price";
+  req.query.fields = "name,price,ratingsAverage,images";
+  next();
+});
+const aliasFeaturedProduct = catchAsync(async (req, res, next) => {
+  req.query.isFeatured = "true";
+  req.query.limit = "8";
+  req.query.sort = "-ratingsAverage,price";
+  req.query.fields = "name,price,ratingsAverage,images";
+  next();
+});
 
 const getAllProductsCustomer = catchAsync(async (req, res, next) => {
+  //EXECUTE QUERY
 
-  
+  const features = new APIFeatures(Product.find(), req.query)
+    .filter()
+    .sort()
+    .limit()
+    .paginate();
 
-    
-    // //BUILD QUERY
-
-    // const queryObj={...req.query};
-
-
-    // //FILTERING
-    // const excludedFields=["page","sort","limit","fields"];
-
-    // excludedFields.forEach(el=>delete queryObj[el])
-
-    // //ADVANCED FILTERING
-    // let queryStr=JSON.stringify(queryObj);
-    // queryStr=queryStr.replace(/\b(gte|gt|lte|lt)\b/g,match=>`$${match}`);
-    
-    // let query =  Product.find(JSON.parse(queryStr));
-
-   //SORTING
-
-  //  if(req.query.sort){
-
-  //     const sortBy=req.query.sort.split(',').join(' ');
-  //      query.sort(sortBy);
-  //      //in case there is tie sort('price ratingsAvg)
-  //  }else{
-  //   query.sort("-createdAt")
-  //  }
-
-
-   //LIMITING FIELD
-
-  //  if(req.query.fields){
-  //   const fields=req.query.fields.split(',').join(' ');
-
-  //   query=query.select(fields)
-
-  //  }else{
-  //   query=query.select("-__v")
-  //  }
-
-  //  PAGINATION
-  //  const page=req.query.page * 1 || 1 ;
-  //  const limit=req.query.limit * 1 || 15;
-  //  const skip=(page - 1 ) * limit;
-
-  //  query=query.skip(skip).limit(limit);
-
-
-  //  if(req.query.page){
-  //   const numProducts=await Product.countDocuments();
-  //   if(skip > numProducts){
-  //     throw new Error('This page does not exist')
-  //   }
-  //  }
-
-
-
-
-    
-   
-
-  
-
- //EXECUTE QUERY
-
- const features=new APIFeatures(Product.find(),req.query)
- .filter()
- .sort()
- .limit()
- .paginate()
-
-  const products=await features.query;
-  
+  const products = await features.query.explain();
   //SEND QUERY
   res.status(200).json({
     status: "success",
-    result:products.length,
+    result: products.length,
     data: products,
   });
 });
 
 const getProductById = catchAsync(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id)
+    .populate({ path: "category", select: "-__V" })
+    .populate("reviews");
 
   res.status(201).json({
     status: "success",
-    
+
     data: product,
   });
 });
@@ -186,22 +121,92 @@ const updateProduct = catchAsync(async (req, res, next) => {
 
 //=======================aggregation=======================================//
 
-
-
-
-
-
-
-
-
-
-
-
 //=======================aggregation=======================================//
 
+// products overall stats
+const productStats = catchAsync(async (req, res, next) => {
+  const stats = await Product.aggregate([
+    {
+      $match: { ratingsAverage: { $gte: 4.5 } },
+    },
+    {
+      $group: {
+        _id: null,
+        num: { $sum: 1 },
+        avgRating: { $avg: "$ratingsAverage" },
+        avgPrice: { $avg: "$price" },
+        minPrice: { $min: "$price" },
+        maxPrice: { $max: "$price" },
+      },
+    },
+    {
+      $sort: { avgPrice: 1 },
+    },
+  ]);
 
+  res.status(200).json({
+    status: "success",
+    data: {
+      stats,
+    },
+  });
+});
+// const productStats=catchAsync(async(req,res,next)=>{
+//   const stats=await Product.aggregate([
 
+//     {
+//       $unwind:"$colors"
+//     },
+//     {
+//       $group:{
+//         _id:"$colors",
+//         num:{$sum:1},
+//         products:{
+//           $push:"$name"
+//         }
+//       }
+//     }
 
+//   ])
+
+// res.status(200).json({
+//   status:"success",
+//   data:{
+//     stats
+//   }
+// })
+
+// })
+
+// product group by property
+
+const ProductsStatsByPropery = catchAsync(async (req, res, next) => {
+  const { property } = req.body;
+  const stats = await Product.aggregate([
+    {
+      $match: { ratingsAverage: { $gte: 3.5 } },
+    },
+    {
+      $group: {
+        _id: `$${property}`,
+        num: { $sum: 1 },
+        avgRating: { $avg: "$ratingsAverage" },
+        avgPrice: { $avg: "$price" },
+        minPrice: { $min: "$price" },
+        maxPrice: { $max: "$price" },
+      },
+    },
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      stats,
+    },
+  });
+});
+
+// ====================Nested Route==========================//
 
 module.exports = {
   createProduct,
@@ -209,6 +214,8 @@ module.exports = {
   getProductById,
   updateProduct,
   getAllProductsCustomer,
-  aliasTopProduct,
-  aliasFeaturedProduct
+  aliasTopCheapProduct,
+  aliasFeaturedProduct,
+  productStats,
+  ProductsStatsByPropery,
 };

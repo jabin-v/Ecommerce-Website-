@@ -26,7 +26,9 @@ const userRouter=require('./routes/api/user');
 const categoryRouter=require('./routes/api/category');
 const productRouter=require('./routes/api/product');
 const cartRouter=require('./routes/api/cart');
+const reviewRouter=require('./routes/api/review');
 const uploadImageRouter=require('./routes/api/uploadImage');
+
 const corsOptions = require("./config/corsOptions");
 const credentials = require("./middlewares/credentials");
 const  verifyToken = require('./middlewares/verifyToken');
@@ -80,6 +82,7 @@ app.use('/api/products', productRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/upload',uploadImageRouter);
+app.use('/api/reviews',reviewRouter);
 
 app.use(verifyToken);
 app.use('/api/employees',employeesRouter );

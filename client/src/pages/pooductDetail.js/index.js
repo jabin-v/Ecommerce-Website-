@@ -12,24 +12,34 @@ import NewProduct from '../../components/newProduct/NewProduct';
 
 const ProductDetail = () => {
 
-    const imgs = document.querySelectorAll('.img-select a');
-    const imgBtns = [...imgs];
-    let imgId = 1; 
-    imgBtns.forEach((imgItem) => {
-        imgItem.addEventListener('click', (event) => {
-            event.preventDefault();
-            imgId = imgItem.dataset.id;
-            slideImage();
-        });
+   const imgs = document.querySelectorAll('.img-select a');
+const imgBtns = [...imgs];
+let imgId = 1;
+
+imgBtns.forEach((imgItem) => {
+
+  console.log(imgItem.addEventListener)
+
+  
+    imgItem.addEventListener('click', (event) => {
+      console.log("click")
+        event.preventDefault();
+        imgId = imgItem.dataset.id;
+        slideImage();
     });
-    
-    function slideImage(){
-        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
-    
-        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
-    }
-    
-    window.addEventListener('resize', slideImage);
+});
+
+
+
+function slideImage(){
+    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+    console.log(displayWidth);
+
+    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+}
+
+window.addEventListener('resize', slideImage);
+console.log(window)
 
 
   return (
@@ -76,14 +86,14 @@ const ProductDetail = () => {
         <div className = "product-content">
           <h2 className = "product-title">nike shoes</h2>
           <a href = "#" className = "product-link">visit nike store</a>
-          <div className = "product-rating">
+          {/* <div className = "product-rating">
             <i className = "fas fa-star"></i>
             <i className = "fas fa-star"></i>
             <i className = "fas fa-star"></i>
             <i className = "fas fa-star"></i>
             <i className = "fas fa-star-half-alt"></i>
             <span>4.7(21)</span>
-          </div>
+          </div> */}
 
           <div className = "product-price">
             <p className = "last-price">Old Price: <span>$257.00</span></p>
