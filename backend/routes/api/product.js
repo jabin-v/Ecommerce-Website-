@@ -15,9 +15,9 @@ router.use('/:productId/reviews',reviewRouter)
 
 router.route('/top-5-cheap').get(productController.aliasTopCheapProduct,productController.getAllProductsCustomer)
 router.route('/featured').get(productController.aliasFeaturedProduct,productController.getAllProductsCustomer)
-router.route('/stats-overall').get(productController.productStats)
+router.route('/stats-overall/:property').get(productController.productStats)
 router.route('/stats-property').get(productController.ProductsStatsByPropery)
-router.route('/productsCustomer').get(productController.getAllProductsCustomer)
+router.route('/search').get(productController.getAllProductsCustomer)
 
 
 

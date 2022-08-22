@@ -8,7 +8,24 @@ class APIFeatures{
     filter(){
        //BUILD QUERY
   
-       const queryObj={...this.queryString};
+       let queryObj={...this.queryString};
+
+       if(queryObj.price)
+       { queryObj.price=JSON.parse(queryObj.price)}
+
+      if(queryObj.colors){
+        queryObj.colors=JSON.parse(queryObj.colors)
+
+      }
+      if(queryObj.activity){
+        queryObj.activity=JSON.parse(queryObj.activity)
+
+      }
+      if(queryObj.ratingsAverage){
+        queryObj.ratingsAverage=JSON.parse(queryObj.ratingsAverage)
+
+      }
+
   
   
        //FILTERING
@@ -18,7 +35,11 @@ class APIFeatures{
    
        //ADVANCED FILTERING
        let queryStr=JSON.stringify(queryObj);
-       queryStr=queryStr.replace(/\b(gte|gt|lte|lt)\b/g,match=>`$${match}`);
+       
+       
+       queryStr=queryStr.replace(/\b(gte|gt|lte|lt|in)\b/g,match=>`$${match}`);
+
+        
        
     
       this.query=this.query.find(JSON.parse(queryStr));

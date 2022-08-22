@@ -1,0 +1,61 @@
+
+.filter-container{
+    display:flex;
+    position:relative
+    
+}
+.filter-sidebar{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 30px;
+    left: 0;
+    padding: 0;
+    min-width: calc(25% - 15px);
+    
+ 
+  
+
+    background: var(--white);
+  
+   
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    
+    /* visibility: hidden; */
+      /* transition: 0.5s ease; */
+    }
+    .test{
+        color:red;
+        font-size:12px;
+    }
+    .filter-category{
+        max-height:200px;
+        width:100%;
+      
+        overflow-y: scroll;
+        overscroll-behavior: contain;
+    }
+
+    .filter-title{
+        color:var(--salmon-pink)
+    }
+
+@media (max-width: 990px) {
+
+    .filter-sidebar{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: 320px;
+        overflow-y: scroll;
+        overscroll-behavior: contain;
+       
+        transition: 0.5s ease-out;
+         z-index: 20;
+        
+    }
+   
+
+}

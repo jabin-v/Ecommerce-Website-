@@ -14,6 +14,14 @@ const NewProduct = () => {
             <ShowCaseCard/>
             <ShowCaseCard/>
             <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
+            <ShowCaseCard/>
 
             </div>
             </div>

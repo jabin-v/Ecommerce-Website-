@@ -53,6 +53,12 @@
         margin-bottom: 15px;
       }
     
+      .sidebar-menu-category-list > li > ul >li >a{
+
+        font-weight:600;
+        font-size:15px;
+        color:var(--salmon-pink)
+      }
       @media (min-width: 1024px) {
         .sidebar {
           --fs-5: 0.941rem;

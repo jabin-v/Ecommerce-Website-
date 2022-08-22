@@ -20,7 +20,7 @@ const createProduct = catchAsync(async (req, res, next) => {
     activity,
     isFeatured,
   } = req.body;
-  console.log("controller", response);
+
 
   const productObj = {
     name,
@@ -84,7 +84,9 @@ const aliasFeaturedProduct = catchAsync(async (req, res, next) => {
 });
 
 const getAllProductsCustomer = catchAsync(async (req, res, next) => {
-  //EXECUTE QUERY
+
+
+ 
 
   const features = new APIFeatures(Product.find(), req.query)
     .filter()
@@ -92,7 +94,10 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
     .limit()
     .paginate();
 
-  const products = await features.query.explain();
+  const products = await features.query;
+
+ 
+
   //SEND QUERY
   res.status(200).json({
     status: "success",
@@ -124,23 +129,45 @@ const updateProduct = catchAsync(async (req, res, next) => {
 //=======================aggregation=======================================//
 
 // products overall stats
+// const productStats = catchAsync(async (req, res, next) => {
+//   const stats = await Product.aggregate([
+//     {
+//       $match: { ratingsAverage: { $gte: 4.5 } },
+//     },
+//     {
+//       $group: {
+//         _id: null,
+//         num: { $sum: 1 },
+//         avgRating: { $avg: "$ratingsAverage" },
+//         avgPrice: { $avg: "$price" },
+//         minPrice: { $min: "$price" },
+//         maxPrice: { $max: "$price" },
+//       },
+//     },
+//     {
+//       $sort: { avgPrice: 1 },
+//     },
+//   ]);
+
+//   res.status(200).json({
+//     status: "success",
+//     data: {
+//       stats,
+//     },
+//   });
+// });
 const productStats = catchAsync(async (req, res, next) => {
+  const property = req.params.property;
+
   const stats = await Product.aggregate([
     {
-      $match: { ratingsAverage: { $gte: 4.5 } },
+      $unwind: `$${property}`,
     },
     {
       $group: {
-        _id: null,
+        _id: `$${property}`,
         num: { $sum: 1 },
-        avgRating: { $avg: "$ratingsAverage" },
-        avgPrice: { $avg: "$price" },
-        minPrice: { $min: "$price" },
-        maxPrice: { $max: "$price" },
       },
-    },
-    {
-      $sort: { avgPrice: 1 },
     },
   ]);
 
@@ -151,41 +178,13 @@ const productStats = catchAsync(async (req, res, next) => {
     },
   });
 });
-// const productStats=catchAsync(async(req,res,next)=>{
-//   const stats=await Product.aggregate([
-
-//     {
-//       $unwind:"$colors"
-//     },
-//     {
-//       $group:{
-//         _id:"$colors",
-//         num:{$sum:1},
-//         products:{
-//           $push:"$name"
-//         }
-//       }
-//     }
-
-//   ])
-
-// res.status(200).json({
-//   status:"success",
-//   data:{
-//     stats
-//   }
-// })
-
-// })
 
 // product group by property
 
 const ProductsStatsByPropery = catchAsync(async (req, res, next) => {
   const { property } = req.body;
+
   const stats = await Product.aggregate([
-    {
-      $match: { ratingsAverage: { $gte: 3.5 } },
-    },
     {
       $group: {
         _id: `$${property}`,
