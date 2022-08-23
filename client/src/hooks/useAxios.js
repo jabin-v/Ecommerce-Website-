@@ -23,7 +23,7 @@ const UseAxios=(configObj)=>{
                 })
 
                 
-                setResponse(res.data.data.stats)
+                setResponse(res.data.data)
                 
             } catch (error) {
 
@@ -45,6 +45,8 @@ const UseAxios=(configObj)=>{
 
     },[])
 
+
+    console.log("axios",response)
 
 
 

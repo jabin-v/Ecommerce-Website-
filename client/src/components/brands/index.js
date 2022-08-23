@@ -19,6 +19,8 @@ const Brand = () => {
     requestConfig: {},
   });
 
+
+
   const dispatch = useDispatch();
 
   const handleBrandChange = (e) => {
@@ -38,7 +40,7 @@ const Brand = () => {
     <div>
       <FormControl>
         <FormGroup>
-          {property.map((brand) => (
+          {property.stats?.map((brand) => (
             <FormControlLabel
               key={brand._id}
               label={brand._id}

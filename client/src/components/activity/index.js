@@ -9,7 +9,7 @@ import { activity } from '../../features/filter/filterSlice';
 const Activity = () => {
   const [activities, setActivities] = useState([]);
 
-const [property,error,isLoading]=UseAxios({
+const [response,error,isLoading]=UseAxios({
     axiosInstance:axios,
     method:"GET",
     url:'/stats-overall/activity',
@@ -19,6 +19,8 @@ const [property,error,isLoading]=UseAxios({
 })
 
 const dispatch=useDispatch();
+
+console.log(response)
 
 
 
@@ -50,7 +52,7 @@ dispatch(activity(activities))
        <FormControl>
         <FormGroup>
          {
-          property.map((activity)=>
+          response.stats?.map((activity)=>
           <FormControlLabel
           key={activity._id}
           label={activity._id}

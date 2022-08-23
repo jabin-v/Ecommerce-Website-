@@ -175,6 +175,7 @@ button {
     --transition-timing: 0.2s ease;
 
 
+
 }
 
 * {
@@ -223,6 +224,7 @@ table{
     border-spacing:0;
 }
 
+
 input::placeholder{
     font:inherit
 }
@@ -263,6 +265,15 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
 
 /* REUSABLE */
 .container{

@@ -3,7 +3,7 @@ import './productCard.css'
 import image from '../../images/products/jacket-1.jpg'
 
 
-const ProductMinimalCard = (props) => {
+const ProductMinimalCard = ({name,id,image,price}) => {
   return (
     <div className="showcase">
 
@@ -14,13 +14,13 @@ const ProductMinimalCard = (props) => {
                     <div className="showcase-content">
 
                       <a href="#">
-                        <h4 className="showcase-title">Relaxed Short full Sleeve T-Shirt</h4>
+                        <h4 className="showcase-title">{name}</h4>
                       </a>
 
                       <a href="#" className="showcase-category">Clothes</a>
 
                       <div className="price-box">
-                        <p className="price">$45.00</p>
+                        <p className="price">₹ {" "}{price}</p>
                         <del>$12.00</del>
                       </div>
 

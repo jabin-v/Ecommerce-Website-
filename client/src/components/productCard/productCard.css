@@ -51,3 +51,7 @@
     font-size: var(--fs-9);
     color: var(--sonic-silver);
   }
+
+  .showcase-img-box img{
+    width:70px;
+  }

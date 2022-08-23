@@ -55,7 +55,7 @@ dispatch(color(sizes))
        <FormControl>
        <FormGroup>
         {
-          property.map((size)=>
+          property.stats?.map((size)=>
           <FormControlLabel
           key={size._id}
           label={size._id}
