@@ -6,6 +6,8 @@ const router=express.Router();
 
 router.route('/')
      .post(CartController.addToCart)
+     .patch(CartController.removeCart)
+     .get(CartController.getCart)
 
 
 

@@ -20,7 +20,7 @@ const initialState={
     },
     category:[],
     ratingsAverage:{
-        gte:'',
+        gte:'0',
         lte:'5'
     }
    

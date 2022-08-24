@@ -95,7 +95,7 @@ const Search = () => {
           </div>
 
           <div className="search-container">
-            <NewProduct />
+            {/* <NewProduct /> */}
           </div>
         </div>
       </div>

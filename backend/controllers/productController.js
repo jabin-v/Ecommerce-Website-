@@ -21,6 +21,8 @@ const createProduct = catchAsync(async (req, res, next) => {
     isFeatured,
   } = req.body;
 
+  console.log(req.body)
+
 
   const productObj = {
     name,
@@ -85,6 +87,8 @@ const aliasFeaturedProduct = catchAsync(async (req, res, next) => {
 
 const getAllProductsCustomer = catchAsync(async (req, res, next) => {
 
+  
+
 
   req.query.fields = "name,price,ratingsAverage,images";
 
@@ -95,6 +99,9 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
     .paginate();
 
   const products = await features.query;
+
+
+
 
  
 

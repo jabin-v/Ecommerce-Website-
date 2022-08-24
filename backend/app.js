@@ -83,13 +83,13 @@ app.use('/api/category', categoryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/upload',uploadImageRouter);
 app.use('/api/reviews',reviewRouter);
-
+app.use('/api/cart',cartRouter);
 app.use(verifyToken);
 app.use('/api/employees',employeesRouter );
 // app.use('/api/users', userRouter);
 // app.use('/api/category', categoryRouter);
 
-app.use('/api/cart',cartRouter);
+// app.use('/api/cart',cartRouter); add back after check
 
 
 
