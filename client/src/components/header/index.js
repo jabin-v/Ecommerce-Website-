@@ -18,6 +18,9 @@ const Header = () => {
   } = useGetCategoriesQuery();
 
   const categoryLIst = useSelector(selectAllCategories);
+  const cart=useSelector((state)=>state.cart.cartTotalQuantity);
+
+  console.log(cart)
 
   const renderCategories = (categories) => {
     let myCategories = [];
@@ -119,7 +122,7 @@ const Header = () => {
                       </Link>
                       
                       <div className="fly-item">
-                        <span className="item-number">0</span>
+                        <span className="item-number">{cart}</span>
                       </div>
                     </div>
                   </div>

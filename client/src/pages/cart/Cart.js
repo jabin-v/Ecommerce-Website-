@@ -27,7 +27,7 @@ const Cart = () => {
   useEffect(()=>{
     dispatch(getTotal())
 
-  },[cart])
+  },[cart,dispatch])
 
 
 

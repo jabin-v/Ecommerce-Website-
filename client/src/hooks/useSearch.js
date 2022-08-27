@@ -7,6 +7,7 @@ const BASE_URL = "http://localhost:3500/api/products/search";
 
 const useSearch = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [products,setProducts]=useState([]);
 
   const dispatch = useDispatch();
 
@@ -37,6 +38,8 @@ if(p1.colors.in.length === 0){
       })
       .then(({ data }) => {
         console.log(data.data);
+
+        setProducts(data.data)
         
 
         // dispatch(addProducts(data.data))
@@ -50,7 +53,7 @@ if(p1.colors.in.length === 0){
   }, [params]);
 
   return {
-    isLoading,
+    isLoading,products
   };
 };
 

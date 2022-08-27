@@ -17,12 +17,16 @@ import "./search.css";
 import Price from "../../components/price";
 
 import useSearch from "../../hooks/useSearch";
+import Products from "../../components/products";
 
 const Search = () => {
   const { data: categories } = useGetCategoriesQuery();
   const categoryLIst = useSelector(selectAllCategories);
   
-  const { isLoading } = useSearch();
+  const { isLoading,products } = useSearch();
+
+  console.log(products)
+
 
 
   const [visible, setVisible] = useState(false);
@@ -95,7 +99,10 @@ const Search = () => {
           </div>
 
           <div className="search-container">
-            {/* <NewProduct /> */}
+            {
+              isLoading ? <p>LOading.......</p> : <Products result={products}/>
+            }
+           
           </div>
         </div>
       </div>

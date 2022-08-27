@@ -1,23 +1,24 @@
 import React from 'react'
 import './productCard.css'
 import image from '../../images/products/jacket-1.jpg'
+import { Link } from 'react-router-dom'
 
 
 const ProductMinimalCard = ({name,id,image,price}) => {
   return (
-    <div className="showcase">
+    <Link to= {`product/${id}`} className="showcase">
 
-                    <a href="#" className="showcase-img-box">
+                    <span  className="showcase-img-box">
                       <img src={image} alt="relaxed short full sleeve t-shirt" width="70" className="showcase-img"/>
-                    </a>
+                    </span>
 
                     <div className="showcase-content">
 
-                      <a href="#">
+                      <span >
                         <h4 className="showcase-title">{name}</h4>
-                      </a>
+                      </span>
 
-                      <a href="#" className="showcase-category">Clothes</a>
+                      <span className="showcase-category">Clothes</span>
 
                       <div className="price-box">
                         <p className="price">₹ {" "}{price}</p>
@@ -26,7 +27,7 @@ const ProductMinimalCard = ({name,id,image,price}) => {
 
                     </div>
 
-                  </div>
+                  </Link>
   )
 }
 

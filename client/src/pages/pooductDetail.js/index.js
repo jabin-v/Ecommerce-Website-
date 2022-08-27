@@ -16,7 +16,7 @@ import SelectSmall from "./Button";
 import SelectSize from "./SelectSize";
 import Recommended from "../../components/RecommendedProducts";
 import Review from "../../components/ReviewInput";
-import { addItem, addToCart } from "../../features/cart/cartSlice";
+import { addItem, addToCart, getTotal } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 
 const ProductDetail = () => {
@@ -94,6 +94,7 @@ const ProductDetail = () => {
       dispatch(
         addItem(addedProductId, doc_Id, addedQuantity, image1, price, name,addedColor,addedSize)
       );
+      dispatch(getTotal());
     }
 
     console.log(response);

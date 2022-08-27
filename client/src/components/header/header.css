@@ -51,7 +51,11 @@
     padding:3px;
     text-align:center;
     line-height:10px;
-    color:var(--white-color)
+    color:var(--bittersweet);
+    top:1px;
+    left:62px;
+    /* background:gray; */
+    /* padding:10px; */
 }
 
 .header-nav .right{
