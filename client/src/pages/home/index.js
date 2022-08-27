@@ -5,8 +5,12 @@ import Slider from '../../components/slider'
 import CategorySlider from '../../components/category'
 import Footer from '../../components/footer'
 import ProductContainer from '../../components/productContainer'
+import { useSelector } from 'react-redux'
+import { selectCurrentToken } from '../../features/auth/authSlice'
 
 const index = () => {
+
+  
   return (
    <div>
     <Header/>

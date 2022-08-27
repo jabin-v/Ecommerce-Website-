@@ -37,6 +37,7 @@ const NewProduct = () => {
               rating={product.ratingsAverage}
               image1={product.images[0].url}
               image2={product.images[1].url}
+              productId={product._id}
               />
               )
             }

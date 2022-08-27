@@ -1,0 +1,72 @@
+.review-input{
+    
+    
+}
+
+.review-input-div{
+    z-index:1000;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:430px;
+    height:400px;
+    padding:60px 35px 35px 35px;
+    border-radius:40px;
+    background-color:#ecf0f3;
+    box-shadow:13px 13px 20px #cbced1,-13px -13px 20px #fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+
+
+}
+
+.review-input-div .desc{
+   
+    border:none;
+    outline:none;
+    fill: none;
+    background-color: inherit !important;
+    background-image: none !important;
+    font-size:18px;
+    color:#555!important;
+    padding:20px 10px 20px 5px;
+    margin-bottm:30px;
+    border-radius:25px;
+    box-shadow:inset 8px 8px 8px #cbced1 ,inset -8px -8px 8px #fff;
+    margin:5px 0px;
+
+
+
+
+
+
+}
+
+.review-btn button{
+    padding:20px;
+    margin-top:20px;
+    background-color:var(--salmon-pink);
+    width:150px;
+    text-align:center;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    
+}
+
+.close-card{
+    background:white;
+    width:50px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    box-shadow:inset 8px 8px 8px #cbced1 ,inset -8px -8px 8px #fff;
+    cursor:pointer;
+}

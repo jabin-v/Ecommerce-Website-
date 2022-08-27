@@ -3,6 +3,7 @@
   border-radius: var(--border-radius-md);
   overflow: hidden;
   transition: var(--transition-timing);
+  max-width:300px;
 }
 .product-grid .showcase:hover { box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1); }
 

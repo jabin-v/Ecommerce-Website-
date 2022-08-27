@@ -18,6 +18,7 @@
 .bottom{
     display:flex;
     justify-content:space-between;
+    gap:10px;
 
 }
 
@@ -37,6 +38,8 @@ flex:3
 }
 .cart-product-detail img{
    width:200px;
+   max-height:175px;
+   object-fit:contain;
 
 }
 .cart-details{
@@ -78,7 +81,7 @@ flex:3
     border:0.5px solid var(--spanish-gray);
     border-radius:10px;
     padding:20px;
-    height:50vh;
+    height:56vh;
 
 }
 

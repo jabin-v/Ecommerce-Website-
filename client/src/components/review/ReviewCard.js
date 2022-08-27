@@ -4,17 +4,17 @@ import img1 from '../../images/icons/quotes.svg'
 import img2 from '../../images/testimonial-1.jpg'
 import './style.css'
 
-const ReviewCard = () => {
+const ReviewCard = ({review,user,rating}) => {
   return (
    <>
    <div className="review card-1">
      
-      <Rating name="disabled" value={5} disabled />
+      <Rating name="disabled" value={rating} disabled />
      
-      <h2 className="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-      <p className="card__apply">
-        <a className="card__link" href="#">Apply Now <i className="fas fa-arrow-right"></i></a>
-      </p>
+      <h2 className="card__title">{review}</h2>
+      <span className="card__apply">
+        <p className="card__link" >{user}</p>
+      </span>
     </div>
     
    </>

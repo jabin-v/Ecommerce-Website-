@@ -14,22 +14,27 @@ import './App.css'
 import ProductDetail from "./pages/pooductDetail.js";
 import Cart from "./pages/cart/Cart";
 import Search from "./pages/serach";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 
 function App() {
   return (
     <Routes>
+      
       <Route path="/" element={<Layout/>}>
         {/* public */}
 
 
         {/* ========= home page ============ */}
          <Route index element={<Home/>}/>
+         <Route path="/product/:productId" element={<ProductDetail/>}/>
          <Route path="/user/cart" element={<Cart/>}/>
          <Route path="/search" element={<Search/>}/>
 
-         <Route path="category/:categoryId" element={<ProductDetail/>}/>
+         
+         
+      
          
 
 

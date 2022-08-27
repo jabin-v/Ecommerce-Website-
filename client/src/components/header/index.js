@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import {
   selectAllCategories,
   useGetCategoriesQuery,
@@ -15,12 +17,7 @@ const Header = () => {
     error,
   } = useGetCategoriesQuery();
 
-  console.log(cat);
-
   const categoryLIst = useSelector(selectAllCategories);
-
-  console.log(categoryLIst);
- 
 
   const renderCategories = (categories) => {
     let myCategories = [];
@@ -93,9 +90,9 @@ const Header = () => {
             </a>
             <div className="left flexitem">
               <div className="logo">
-                <a href="#">
+                <Link to="/">
                   <span className="circle"></span>Store
-                </a>
+                </Link>
               </div>
               <nav className="mobile-hide menu-header">
                 <ul>
@@ -115,14 +112,17 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="iscart">
+                  <div href="#" className="iscart">
                     <div className="icon-large">
+                      <Link to="/user/cart">
                       <i className="ri-shopping-cart-line"></i>
+                      </Link>
+                      
                       <div className="fly-item">
                         <span className="item-number">0</span>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </li>
               </ul>
             </div>

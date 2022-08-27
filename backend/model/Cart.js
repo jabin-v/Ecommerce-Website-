@@ -18,6 +18,14 @@ const cartSchema=new Schema({
         type:Number,
         default:1,
      },
+     color:{
+      type:String,
+      default:"none"
+     },
+     size:{
+      type:String,
+      default:"none"
+     }
 
 
    }]

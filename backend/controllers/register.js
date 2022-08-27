@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 exports.register=async(req,res,next)=>{
 
     const {username,password}=req.body;
+
+    console.log(username)
+    console.log(password)
     if (!username || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
 
     const duplicate = await User.findOne({ username: username }).exec();
