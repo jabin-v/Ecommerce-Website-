@@ -6,7 +6,7 @@ const User = require("../model/User");
 const getCart = catchAsync(async (req, res, next) => {
   ///================//
 
-  // console.log("verify",req.user)
+  console.log("verifying")
   const username = req.user; //   ;req.user;
 
   const userId = await User.findOne({ username }).select("_id").exec();
@@ -138,8 +138,28 @@ const removeCart = catchAsync(async (req, res, next) => {
   }
 });
 
+const clearCart = catchAsync(async (req, res, next) => {
+  const username = req.user ; //   ;req.user;
+
+  const userId = await User.findOne({ username }).select("_id").exec();
+  // const { data } =req.body.payload;
+
+ 
+  if (userId) {
+    const result = await Cart.findOneAndDelete(
+      { user: userId },
+    );
+
+    res.status(202).json("suuceesufully removed");
+  }
+});
+
+
+
+
 module.exports = {
   addToCart,
   removeCart,
   getCart,
+  clearCart
 };

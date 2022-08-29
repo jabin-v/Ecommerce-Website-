@@ -1,4 +1,5 @@
 const User = require('../model/User');
+const catchAsync = require("./../util/catchAsync");
 
 const getAllUsers = async (req, res) => {
     const users = await User.find();
@@ -25,8 +26,21 @@ const getUser = async (req, res) => {
     res.json(user);
 }
 
+const saveAddress=catchAsync(async(req,res,next)=>{
+
+    const username = req.user;
+
+    const userAddress=await User.findByIdAndUpdate({username},{
+        address:req.body.address
+    }).exec();
+
+    req.json({ok:true})
+
+})
+
 module.exports = {
     getAllUsers,
     deleteUser,
-    getUser
+    getUser,
+    saveAddress
 }

@@ -8,6 +8,7 @@ router.route('/')
      .post(CartController.addToCart)
      .patch(CartController.removeCart)
      .get(CartController.getCart)
+     .delete(CartController.clearCart)
 
 
 

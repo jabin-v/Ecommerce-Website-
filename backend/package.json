@@ -21,6 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "nodemon": "^2.0.19",
-    "slugify": "^1.6.5"
+    "react-stripe-checkout": "^2.6.3",
+    "slugify": "^1.6.5",
+    "stripe": "^10.6.0"
   }
 }

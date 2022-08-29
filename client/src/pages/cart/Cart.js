@@ -2,45 +2,108 @@ import "./cart.css";
 import image1 from "../../images/products/sports-1.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import MinimizeIcon from "@mui/icons-material/Minimize";
+import {useNavigate} from 'react-router-dom';
 // /images/products/sports-1.jpg'
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCarts, getTotal, removeFromCart, selectCart } from "../../features/cart/cartSlice";
+import {
+  fetchCarts,
+  getTotal,
+  removeFromCart,
+  selectCart,
+} from "../../features/cart/cartSlice";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Link } from "react-router-dom";
+import Paybutton from "../../components/paybutton/Paybutton";
+import StripeCheckout from "react-stripe-checkout";
+import { selectCurrentToken } from "../../features/auth/authSlice";
+import axios from "axios";
+
+const BASE_URL = 'http://localhost:3500/api';
+
 
 const Cart = () => {
+  const KEY="pk_test_51Lbc37SHvbvS7ni9d15S2L8TSciI1RRzECCfnySKUnnaZO7Ulm4eGcgAzWy8WekYgCdX1GNhdY4ntNhfuMNigep600vVgzxUSu"
   const dispatch = useDispatch();
+  const token=useSelector(selectCurrentToken);
+
+  console.log(KEY)
+
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const navigate=useNavigate();
+
+
 
   const cart = useSelector(selectCart);
 
-  const cartStats=useSelector((state)=>state.cart);
+  const cartStats = useSelector((state) => state.cart);
 
-  console.log(cartStats)
+  console.log(cartStats);
+
+ 
 
   useEffect(() => {
     dispatch(fetchCarts());
   }, []);
 
-  useEffect(()=>{
-    dispatch(getTotal())
-
-  },[cart,dispatch])
-
-
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
 
   console.log(cart);
 
-  const handleRemoveCart=(id)=>{
-    console.log("clicked on remove")
-    console.log(id)
+  const handleRemoveCart = (id) => {
+    console.log("clicked on remove");
+    console.log(id);
 
     dispatch(removeFromCart(id)).unwrap();
-    
+  };
 
-  }
+
+  const onToken = (token) => {
+    setStripeToken(token);
+    console.log("token")
+    console.log(token)
+  };
+  useEffect(() => {
+    const makeRequest = async () => {
+      const res=await axios.post(`${BASE_URL}/stripe/payment`,{
+        tokenId:stripeToken.id,
+        amount:2000
+
+
+        
+    },{
+        headers: {
+            Authorization: `Bearer ${token}`,
+          }
+    })
+
+    console.log(res.data)
+
+    }
+
+    stripeToken && makeRequest()
+      
+ 
+  }, [stripeToken]);
+
+
+
+
+ 
+  
+
+
+
+
+
+
+
 
   return (
     <div>
@@ -84,11 +147,12 @@ const Cart = () => {
                           <div className="cart-product-amount">
                             {item.quantity}
                           </div>
-                          <MinimizeIcon  />
+                          <MinimizeIcon />
                         </div>
                         <div className="prod-price">{item.product.price}</div>
                       </div>
-                      <HighlightOffIcon onClick={()=>handleRemoveCart(item._id)}
+                      <HighlightOffIcon
+                        onClick={() => handleRemoveCart(item._id)}
                         style={{ cursor: "pointer", marginTop: "5px" }}
                       />
 
@@ -116,9 +180,16 @@ const Cart = () => {
               </div>
               <div className="summary-item total">
                 <span className="summary-item-text">Total</span>
-                <span className="summary-item-price">{cartStats.cartTotalAmount}</span>
+                <span className="summary-item-price">
+                  {cartStats.cartTotalAmount}
+                </span>
               </div>
-              <button className="cart-btn">Checkout Now</button>
+              <Link to="/user/cart-checkout">
+             
+                <button className="cart-btn">Check out</button>
+
+                </Link>
+             
             </div>
           </div>
         </div>

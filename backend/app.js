@@ -28,6 +28,7 @@ const productRouter=require('./routes/api/product');
 const cartRouter=require('./routes/api/cart');
 const reviewRouter=require('./routes/api/review');
 const uploadImageRouter=require('./routes/api/uploadImage');
+const stripeRouter=require("./routes/api/stripe")
 
 const corsOptions = require("./config/corsOptions");
 const credentials = require("./middlewares/credentials");
@@ -46,8 +47,12 @@ app.use(credentials)
 app.use(cors(corsOptions));
 
 
+app.use( bodyParser.json({limit: '50mb'}))
 
-app.use(bodyParser.json({limit: '50mb'}));
+
+
+
+
 //handle form data
 
 app.use(express.urlencoded({extended:false}))
@@ -80,14 +85,22 @@ app.use('/api/refresh',refreshRouter)
 app.use('/api/logout',logoutRouter)
 app.use('/api/products', productRouter);
 app.use('/api/category', categoryRouter);
-app.use('/api/users', userRouter);
+
 app.use('/api/upload',uploadImageRouter);
 app.use('/api/reviews',reviewRouter);
+
+
+
 
 
 app.use(verifyToken);
 app.use('/api/employees',employeesRouter );
 app.use('/api/cart',cartRouter);
+app.use('/api/users', userRouter);
+app.use('/api/stripe', stripeRouter);
+
+
+
 
 // app.use('/api/users', userRouter);
 // app.use('/api/category', categoryRouter);

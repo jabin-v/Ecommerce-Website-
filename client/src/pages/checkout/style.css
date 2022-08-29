@@ -1,0 +1,43 @@
+.checkout-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    width:430px;
+    height:850px;
+    padding:60px 35px 35px 35px;
+    border-radius:40px;
+    background-color:#ecf0f3;
+    box-shadow:13px 13px 20px #cbced1,-13px -13px 20px #fff
+}
+
+.checkout-section form{
+    display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+flex-grow: 1;
+padding-bottom: 1rem;
+}
+.checkout-section input{
+border:none;
+outline:none;
+fill: none;
+background-color: inherit !important;
+background-image: none !important;
+font-size:18px;
+color:#555!important;
+padding:20px 10px 20px 5px;
+}
+.submit{
+    outline:none;
+    border:none;
+    cursor:pointer;
+   padding:10px;
+    border-radius:30px;
+    font-size:20px;
+    font-weight:700;
+    background:var(--bittersweet);
+    margin:20px 0px;
+    color:#fff;
+    text-align:center;
+}
