@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../features/auth/authApiSlice";
 import { setCredentials } from "../../features/auth/authSlice";
 import "./register.css"
@@ -111,6 +111,11 @@ const Register = () => {
                 </section>
             ) : (
                 <div className="register-wrapper">
+                    <Link to="/">
+                    <div className="register-home">
+                        Back to Home
+                    </div>
+                    </Link>
                     <div className="register-section">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>

@@ -5,6 +5,8 @@ import {useDispatch} from 'react-redux';
 import {setCredentials} from '../../features/auth/authSlice';
 import { useLoginMutation } from '../../features/auth/authApiSlice';
 import { Link,useNavigate,useLocation } from 'react-router-dom';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
 
 
 
@@ -68,9 +70,11 @@ const Login = () => {
     }
 
     return (
+        <>
+        <Header/>
       
               
-            <div className='login-wrapper'>
+            <div className='login-wrapper container'>
                 <div className='login-div'>
                     <div className='login-logo'>
 
@@ -141,6 +145,9 @@ const Login = () => {
                 </div>
                 
             </div>
+            <Footer/>
+
+            </>
     
     )
 }

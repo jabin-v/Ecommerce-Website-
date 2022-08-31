@@ -38,6 +38,7 @@ const addToCart = catchAsync(async (req, res, next) => {
  
 
   const username = req.user; //   ;req.user;
+  
 
   console.log("items", req.body.cartItems);
   const addProduct = req.body.cartItems.product;
@@ -103,10 +104,7 @@ const addToCart = catchAsync(async (req, res, next) => {
       cartItems: [req.body.cartItems],
     });
 
-    res.status(200).json({
-      status: "Add to cart success",
-      data: newCart,
-    });
+    res.status(200).json(newCart);
   }
 });
 

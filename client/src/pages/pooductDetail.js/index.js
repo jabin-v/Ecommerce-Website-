@@ -66,7 +66,7 @@ const ProductDetail = () => {
       addToCart({ productId:singleProduct._id, quantity: 1,color:selectedColor,size:selectedsize ||"one size"})
     ).unwrap();
 
-    console.log(response.cartItems);
+    console.log(response);
 
     // find the document with same index as product id and
 

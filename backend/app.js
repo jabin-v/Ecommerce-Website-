@@ -28,6 +28,7 @@ const productRouter=require('./routes/api/product');
 const cartRouter=require('./routes/api/cart');
 const reviewRouter=require('./routes/api/review');
 const uploadImageRouter=require('./routes/api/uploadImage');
+const orderRouter=require('./routes/api/order');
 const stripeRouter=require("./routes/api/stripe")
 
 const corsOptions = require("./config/corsOptions");
@@ -93,11 +94,18 @@ app.use('/api/reviews',reviewRouter);
 
 
 
+
+
+
+
 app.use(verifyToken);
 app.use('/api/employees',employeesRouter );
 app.use('/api/cart',cartRouter);
 app.use('/api/users', userRouter);
 app.use('/api/stripe', stripeRouter);
+app.use('/api/order',orderRouter);
+
+
 
 
 

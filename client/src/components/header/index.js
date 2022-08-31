@@ -64,13 +64,13 @@ const Header = () => {
             <div className="right">
               <ul className="flexitem main-links">
                 <li>
-                  <a href="#">Sign Up</a>
+                  <Link to="/register">Sign Up</Link>
                 </li>
                 <li>
-                  <a href="#">My Account</a>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <a href="#">Order tracking</a>
+                  <Link to="/user/order">Order tracking</Link>
                 </li>
                 <li>
                   <a href="#">USD</a>
@@ -115,17 +115,19 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <div href="#" className="iscart">
+                  <Link to="/user/cart"  className="iscart">
                     <div className="icon-large">
-                      <Link to="/user/cart">
+                      
                       <i className="ri-shopping-cart-line"></i>
-                      </Link>
+                      
                       
                       <div className="fly-item">
                         <span className="item-number">{cart}</span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
+
+
                 </li>
               </ul>
             </div>

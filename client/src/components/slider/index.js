@@ -3,6 +3,7 @@ import './slider.css'
 import banner1 from '../../images/banner-1.jpg'
 import banner2 from '../../images/banner-1.jpg'
 import banner3 from '../../images/banner-1.jpg'
+import { Link } from 'react-router-dom';
 
 // <p className="banner-subtitle">Trending item</p>
 
@@ -55,7 +56,7 @@ const Sider = () => {
             <h2 className="banner-title">{banner.mainheading}</h2>
     
     
-            <a href="#" className="banner-btn">Shop now</a>
+            <Link to="/search" className="banner-btn">Shop now</Link>
     
           </div>
     

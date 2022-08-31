@@ -1,0 +1,41 @@
+.order-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    
+}
+.order-image img{
+    width:200px;
+    height:175px;
+    object-fit:contain;
+    
+}
+
+.order-product-spec{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+
+}
+
+.order-price-details{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+
+}
+.order-status{
+
+}
+
+@media(min-width:875px){
+
+    .order-container{
+        flex-direction:row;
+        max-height:200px;
+        margin:10px 0px 10px 0 ;
+    }
+    
+  }

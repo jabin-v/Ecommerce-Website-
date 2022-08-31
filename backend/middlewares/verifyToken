@@ -23,6 +23,7 @@ const verifyToken = (req, res, next) => {
              }//invalid token
             req.user = decoded.UserInfo.username;
             req.roles = decoded.UserInfo.roles;
+            console.log("next")
            
             next();
         }

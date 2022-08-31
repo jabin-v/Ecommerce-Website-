@@ -67,6 +67,7 @@ export const addToCart = createAsyncThunk(
         },
       };
       const response = await axios.post(CART_URL, { cartItems }, config);
+      console.log(response)
 
       return response.data;
     } catch (error) {

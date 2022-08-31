@@ -3,6 +3,7 @@ import {apiSlice} from './api/apiSlice';
 import authReducer from '../features/auth/authSlice';
 import filterReducer from '../features/filter/filterSlice';
 import cartReducer from '../features/cart/cartSlice';
+import orderReducer from '../features/order/orderSlice';
 
 import storage from 'redux-persist/lib/storage';
 import {
@@ -26,7 +27,10 @@ const persistConfig = {
     [apiSlice.reducerPath]:apiSlice.reducer,
     auth:authReducer,
     filter:filterReducer,
-    cart:cartReducer });
+    cart:cartReducer,
+    order:orderReducer
+
+   });
 
     const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -7,11 +7,12 @@
     align-items:center;
     justify-content:center;
     color:#555;
-    background-color:#ecf0f3
+    /* background-color:#ecf0f3; */
 }
 
 
 .login-div{
+  margin-top:-250px;
     width:430px;
     height:700px;
     padding:60px 35px 35px 35px;
