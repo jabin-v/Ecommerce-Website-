@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Activity from "../../components/activity";
 import Brands from "../../components/brands";
 import Colors from "../../components/colors";
@@ -18,14 +18,29 @@ import Price from "../../components/price";
 
 import useSearch from "../../hooks/useSearch";
 import Products from "../../components/products";
+import { useLocation, useNavigate } from "react-router-dom";
+import { category } from "../../features/filter/filterSlice";
 
 const Search = () => {
   const { data: categories } = useGetCategoriesQuery();
   const categoryLIst = useSelector(selectAllCategories);
+  const dispatch=useDispatch();
+
+  const location = useLocation();
   
   const { isLoading,products } = useSearch();
 
-  console.log(products)
+useEffect(()=>{
+
+  if(location.state){
+
+    dispatch(category([location.state.catId]))
+    console.log(location.state.catId)
+  }
+
+},[location.state])
+
+  
 
 
 
@@ -39,7 +54,7 @@ const Search = () => {
 
   return (
     <>
-      <Header />
+      <Header search />
       <div className="product-container">
         <div className="container">
           <div className="sidebar has-scrollbar" style={styles.sidebar}>

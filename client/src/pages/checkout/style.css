@@ -4,12 +4,12 @@
     justify-content: flex-start;
     padding: 1rem;
     width:430px;
-    height:850px;
+    height:700px;
     padding:60px 35px 35px 35px;
     border-radius:40px;
     background-color:white;
     box-shadow:13px 13px 20px #cbced1,-13px -13px 20px #fff;
-    margin-top:-220px;
+    margin-top:-30px;
     background-color:#ecf0f3;
 }
 
@@ -42,4 +42,18 @@ padding:20px 10px 20px 5px;
     margin:20px 0px;
     color:#fff;
     text-align:center;
+}
+@media (max-width: 500px) {
+    .checkout-section{
+        width:400px;
+    }
+
+
+}
+@media (max-width: 420px) {
+    .checkout-section{
+        width:350px;
+    }
+
+
 }

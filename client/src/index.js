@@ -11,8 +11,8 @@ import { persistor, store } from './app/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { fetchCarts, getTotal } from './features/cart/cartSlice';
 
-store.dispatch(getTotal());
-store.dispatch(fetchCarts());
+// store.dispatch(getTotal());
+// store.dispatch(fetchCarts());
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

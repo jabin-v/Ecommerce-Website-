@@ -6,6 +6,8 @@ import  {createSlice} from "@reduxjs/toolkit";
 
 const initialState={
 
+    keyword:"",
+
   
     price:{
         gte:"10",
@@ -56,6 +58,9 @@ const filterSlice=createSlice({
         },
         category:(state,action)=>{
             state.category= action.payload
+        },
+        keyword:(state,action)=>{
+            state.keyword=action.payload
         }
         
 
@@ -66,7 +71,7 @@ const filterSlice=createSlice({
 })
 
 
-export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category}=filterSlice.actions;
+export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category,keyword}=filterSlice.actions;
 export default filterSlice.reducer;
 
 

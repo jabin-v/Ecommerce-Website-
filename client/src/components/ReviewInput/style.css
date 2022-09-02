@@ -1,10 +1,16 @@
 .review-input{
+
+    position: fixed;
+    top: 350px;
+    left: 20px;
+    right: 20px;
+    
     
     
 }
 
 .review-input-div{
-    z-index:1000;
+    z-index:100000;
 
     position: absolute;
     top: 50%;
@@ -20,6 +26,7 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    margin:0 auto;
 
 
 
@@ -39,6 +46,7 @@
     border-radius:25px;
     box-shadow:inset 8px 8px 8px #cbced1 ,inset -8px -8px 8px #fff;
     margin:5px 0px;
+    
 
 
 
@@ -70,3 +78,26 @@
     box-shadow:inset 8px 8px 8px #cbced1 ,inset -8px -8px 8px #fff;
     cursor:pointer;
 }
+
+@media (max-width: 500px) {
+
+    .review-input-div{
+        width:350px
+    }
+  
+    
+  }
+@media (max-width: 390px) {
+
+    .review-input-div{
+        width:250px
+    }
+    .review-input-div .desc{
+        width:200px;
+    }
+    .review-btn button{
+        padding:10px
+    }
+  
+    
+  }

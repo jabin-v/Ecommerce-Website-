@@ -4,9 +4,35 @@ class APIFeatures{
       this.query=query;
       this.queryString=queryString
     }
+
+    
+    search() {
+  //     let regex = new RegExp(value.searchQuery,'i');
+  //  { $and: [ { $or: [{title: regex },{description: regex}] }, {category: value.category}, {city:value.city} ] }
+
+     
+
+        let regex = new RegExp(this.queryString.keyword,'i');
+        const keyword = this.queryString.keyword
+        ? { $or: [{name: regex },{description: regex},{activity:regex},{brand:regex},{colors:regex}] }
+        : {};
+  
+      this.query = this.query.find({ ...keyword });
+      return this;
+
+
+      
+     
+      
+    }
   
     filter(){
        //BUILD QUERY
+
+
+       console.log(this.queryString)
+
+       
   
        let queryObj={...this.queryString};
 
@@ -29,7 +55,7 @@ class APIFeatures{
   
   
        //FILTERING
-       const excludedFields=["page","sort","limit","fields"];
+       const excludedFields=["page","sort","limit","fields","keyword"];
    
        excludedFields.forEach(el=>delete queryObj[el])
    
@@ -50,6 +76,7 @@ class APIFeatures{
   
     sort(){
       
+     
      if(this.queryString.sort){
   
       const sortBy=this.queryString.sort.split(',').join(' ');

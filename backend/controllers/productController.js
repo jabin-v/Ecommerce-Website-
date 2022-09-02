@@ -89,10 +89,14 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
 
   
 
+  
+
 
   req.query.fields = "name,price,ratingsAverage,images";
+  console.log(req.query)
 
   const features = new APIFeatures(Product.find(), req.query)
+    .search()
     .filter()
     .sort()
     .limit()

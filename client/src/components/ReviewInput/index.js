@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
 import CloseIcon from '@mui/icons-material/Close';
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { addReview } from "../../features/review/reviewSlice";
+import { hideReviewForm } from "../../features/ui/uiSlice";
 
-const Review = ({ setVisible }) => {
+const Review = ({ setVisible,productId}) => {
   const [value, setValue] = useState(null);
   const [review, setReview] = useState(null);
+  const dispatch=useDispatch();
 
   console.log(value);
   console.log(review);
@@ -20,6 +24,19 @@ const Review = ({ setVisible }) => {
 
 
   const handleReviewSubmit=()=>{
+
+    const data={
+      rating:value,
+      review,
+      product:productId
+    }
+
+    console.log(data)
+
+    dispatch(addReview(data))
+    
+
+    
     //send to backend
   }
 
@@ -27,7 +44,7 @@ const Review = ({ setVisible }) => {
     <div className="review-input">
      
       <div className="review-input-div">
-        <div className="close-card" onClick={()=>setVisible(false)}>
+        <div className="close-card" onClick={()=>dispatch(hideReviewForm())}>
         <CloseIcon/>
 
 

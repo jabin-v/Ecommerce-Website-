@@ -5,7 +5,8 @@ const ORDER_URL = "http://localhost:3500/api/order";
 
 const initialState={
     orders:[],
-    recentlyDelivered:[]
+    recentlyDelivered:[],
+    AllDelivered:[]
 }
 
 
@@ -29,6 +30,30 @@ export const createOrder=createAsyncThunk("order/create",async(order,{getState,r
         console.log(error)
         
     }
+
+})
+export const allDelivered=createAsyncThunk("order/deliveredproduct",async(arg,{getState,rejectWithValue})=>{
+  const {auth}=getState();
+
+  
+
+
+  try {
+      const config = {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        };
+        const response = await axios.get(`${ORDER_URL}/alldelivered`,config);
+        return response.data
+     
+
+      
+  } catch (error) {
+
+      console.log(error)
+      
+  }
 
 })
 
@@ -79,6 +104,34 @@ export const getRecentlyDelivered=createAsyncThunk("order/delivered",async(arg,{
 
 })
 
+//cancel order
+export const cancelOrder=createAsyncThunk("order/cancel",async(orderId,{getState,rejectWithValue})=>{
+
+  const {auth}=getState();
+
+console.log(orderId)
+  try {
+      const config = {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        };
+        const response = await axios.patch(`${ORDER_URL}/cancelorder`,{orderId},config);
+        console.log(response)
+        return {response:response.data,orderId
+     }
+
+      
+  } catch (error) {
+
+      console.log(error)
+      
+  }
+
+})
+
+
+
 
 const orderSlice=createSlice({
     name:"order",
@@ -104,6 +157,20 @@ const orderSlice=createSlice({
         state.recentlyDelivered=payload
 
       })
+      builder
+      .addCase(allDelivered.fulfilled,(state,{payload})=>{
+
+        state.AllDelivered=payload
+
+      })
+      builder.addCase(cancelOrder.fulfilled,(state,{payload})=>{
+        
+     const existingOrders=state.orders.filter((order)=>order.orderItems._id !== payload.orderId
+
+     );
+
+     state.orders=existingOrders;
+      })
         
     }
    
@@ -115,5 +182,7 @@ export const { addOrder } = orderSlice.actions;
 
 export const selectAllOrders = (state) => state.order.orders;
 export const selectDelivered = (state) => state.order.recentlyDelivered;
+export const selectAllDelivered = (state) => state.order.AllDelivered;
+
 
 export default orderSlice.reducer;

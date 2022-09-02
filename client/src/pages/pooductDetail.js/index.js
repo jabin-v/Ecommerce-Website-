@@ -9,7 +9,7 @@ import "./style.css";
 import ReviewCard from "../../components/review/ReviewCard";
 import ShowCaseCard from "../../components/showcaseCard/ShowCaseCard";
 import NewProduct from "../../components/newProduct/NewProduct";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useGetProduct from "../../hooks/useGetProduct";
 import Button from "./Button";
 import SelectSmall from "./Button";
@@ -17,20 +17,85 @@ import SelectSize from "./SelectSize";
 import Recommended from "../../components/RecommendedProducts";
 import Review from "../../components/ReviewInput";
 import { addItem, addToCart, getTotal } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { productReview, selectAllReviews } from "../../features/review/reviewSlice";
+import { allDelivered, selectAllDelivered } from "../../features/order/orderSlice";
+import { showReviewForm } from "../../features/ui/uiSlice";
+import { selectCurrentToken } from "../../features/auth/authSlice";
 
 const ProductDetail = () => {
 
   const dispatch=useDispatch();
   const { singleProduct, isLoading } = useGetProduct();
-  const [error,setError]=useState("")
+  const [error,setError]=useState("");
+  const [canReview,setCanReview]=useState(false)
+
+const visible=useSelector(state=>state.ui.review);
+const token=useSelector(selectCurrentToken)
+
+
+
+
+ 
  
   const location = useLocation();
 
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedsize, setSelectedSize] = useState('one size');
 
-  const[visible,setVisible]=useState(true);
+  // const[visible,setVisible]=useState(false);
+
+  useEffect(()=>{
+    if(singleProduct){
+
+      dispatch(productReview(singleProduct.reviews));
+
+      if(token){
+
+        dispatch(allDelivered())
+
+      }
+     
+      
+    }
+
+    
+  },[singleProduct])
+
+  const reviews=useSelector(selectAllReviews);
+  const delivered=useSelector(selectAllDelivered)
+
+useEffect(()=>{
+   
+  if(token){
+
+
+
+    console.log("useefeefkkmk")
+  const itemIndex = delivered?.findIndex(
+
+    
+    (item) => item.orderItems.product === singleProduct?._id
+  );
+ 
+
+  console.log(itemIndex)
+
+  if(itemIndex>=0){
+    console.log("running...........")
+    setCanReview(true)
+  }else{
+    setCanReview(false)
+  }
+  }
+
+  
+ 
+},[singleProduct,canReview])
+
+console.log(canReview)
+
+
 
   
 
@@ -100,6 +165,20 @@ const ProductDetail = () => {
     console.log(response);
   };
 
+  const handeleReviewClick=()=>{
+
+    dispatch(showReviewForm())
+
+
+
+  }
+  // console.log(visible)
+
+ 
+
+
+ 
+
 
 
 
@@ -120,7 +199,7 @@ const ProductDetail = () => {
       {
         isLoading ? <p>Loading ..... </p> :
         <div className="container">
-        <div className="card-wrapper" onClick={()=>setVisible(false)}>
+        <div className="card-wrapper">
           <div className="card">
             <div className="product-imgs">
               <div className="img-display">
@@ -232,6 +311,12 @@ const ProductDetail = () => {
                 <button type="button" className="btn" onClick={handleCart}>
                   Add to Cart
                 </button>
+                {
+                  canReview && <button type="button" className="btn reviewbtn" 
+                  onClick={handeleReviewClick}>
+                  Add Review
+                </button>
+                }
               </div>
             </div>
           </div>
@@ -240,8 +325,8 @@ const ProductDetail = () => {
           <div className="review-top">
             <h4>Reviews</h4>
             {
-              !singleProduct.reviews.length === 0 && <p style={{ display: "flex", cursor: "pointer" }}>
-              View all <ArrowForwardIcon />
+              !reviews.length  && <p style={{ display: "flex", cursor: "pointer" }}>
+              slide to view all reviews <ArrowForwardIcon />
             </p>
             }
 
@@ -251,14 +336,14 @@ const ProductDetail = () => {
           </div>
 
           <div className="review-slider has-scrollbar">
-{singleProduct.reviews.length === 0 ? <p>No reviews yet...</p> :
+{!reviews? <p>No reviews yet...</p> :
 
 
-  singleProduct.reviews.map((review)=>
+ [ ...reviews]?.reverse().map((review)=>
   <ReviewCard
-  key={review._id}
+  key={review.id}
   review={review.review}
-  user={review.user}
+  user={review.user?.username}
   rating={review.rating}
 
 
@@ -283,7 +368,8 @@ const ProductDetail = () => {
       {
         visible &&
          <Review 
-         setVisible={setVisible}
+        //  setVisible={setVisible}
+         productId={singleProduct._id}
           />
           
 

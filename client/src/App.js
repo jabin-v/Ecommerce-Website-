@@ -21,6 +21,7 @@ import Success from "./pages/success";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Order from "./pages/order";
+import ReviewsAll from "./pages/reviewExpand";
 
 const promise = loadStripe(
   "pk_test_51Lbc37SHvbvS7ni9d15S2L8TSciI1RRzECCfnySKUnnaZO7Ulm4eGcgAzWy8WekYgCdX1GNhdY4ntNhfuMNigep600vVgzxUSu"
@@ -34,7 +35,11 @@ function App() {
 
         {/* ========= home page ============ */}
         <Route index element={<Home />} />
+
         <Route path="/product/:productId" element={<ProductDetail />} />
+       
+
+        
         <Route path="/user/cart" element={<Cart />} />
         <Route
           path="/user/cart-checkout"

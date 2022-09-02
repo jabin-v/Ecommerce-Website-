@@ -23,11 +23,17 @@
 .order-price-details{
     display:flex;
     flex-direction:column;
-    gap:5px;
+    gap:8px;
 
 }
 .order-status{
 
+}
+.order-price-details button{
+    padding:3px;
+    background:red;
+    border-radius:10px;
+    color:white;
 }
 
 @media(min-width:875px){

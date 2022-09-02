@@ -1,15 +1,16 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Order = require("../model/Order");
 const User = require("../model/User");
 const APIFeatures = require("../util/APIFeatures");
 const catchAsync = require("../util/catchAsync");
-const moment =require("moment")
+const moment = require("moment");
+const Product = require("../model/Product");
 
 const createOrder = catchAsync(async (req, res, next) => {
-  const username = req.user //   ;req.user;
+  const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
 
-  console.log("orderfot" , userId)
+  console.log("orderfot", userId);
 
   const { shippingInfo, orderItems, paymentInfo, totalPrice } = req.body.order;
 
@@ -58,18 +59,15 @@ const createOrder = catchAsync(async (req, res, next) => {
 //   });
 // });
 
-
 //the user will get all the products that are not delivered yet
 
 const getOrderByuser = catchAsync(async (req, res, next) => {
-
-  const username = req.user//   ;req.user;
+  const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
 
-  console.log(userId)
+  console.log(userId);
 
   const orders = await Order.aggregate([
-
     {
       $match: { user: mongoose.Types.ObjectId(userId) },
     },
@@ -87,8 +85,7 @@ const getOrderByuser = catchAsync(async (req, res, next) => {
     {
       $match: { "orderItems.deliveryStatus": { $ne: "delivered" } },
     },
-    { $sort: {"orderItems.deliveredAt": -1} },
-    
+    { $sort: { "orderItems.deliveredAt": -1 } },
   ]);
 
   res.status(200).json(orders);
@@ -96,17 +93,13 @@ const getOrderByuser = catchAsync(async (req, res, next) => {
 
 //delivered orders
 const getDelivered = catchAsync(async (req, res, next) => {
-
-  const username = req.user//   ;req.user;
+  const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
-  const date=new Date(2022-08-31)
+  const date = new Date(2022 - 08 - 31);
 
- 
-
-  console.log(userId)
+  console.log(userId);
 
   const orders = await Order.aggregate([
-
     {
       $match: { user: mongoose.Types.ObjectId(userId) },
     },
@@ -121,34 +114,44 @@ const getDelivered = catchAsync(async (req, res, next) => {
       },
     },
     {
-      $match: { "orderItems.deliveryStatus": "delivered"  },
+      $match: { "orderItems.deliveryStatus": "delivered" },
     },
-    
-    
-    { $sort: {"orderItems.deliveredAt": -1} },
-    { $limit : 10 }
-   
-   
-   
-    
+
+    { $sort: { "orderItems.deliveredAt": -1 } },
+    { $limit: 10 },
   ]);
 
   res.status(200).json(orders);
 });
+const AllDelivered = catchAsync(async (req, res, next) => {
+  console.log("first");
 
+  const username = req.user; //   ;req.user;
+  const userId = await User.findOne({ username }).select("_id").exec();
+  const date = new Date(2022 - 08 - 31);
 
+  console.log(userId);
 
+  const orders = await Order.aggregate([
+    {
+      $match: { user: mongoose.Types.ObjectId(userId) },
+    },
+    {
+      $unwind: "$orderItems",
+    },
 
+    {
+      $match: { "orderItems.deliveryStatus": "delivered" },
+    },
+    {
+      $project: {
+        "orderItems.product": 1,
+      },
+    },
+  ]);
 
-
-
-
-
-
-
-
-
-
+  res.status(200).json(orders);
+});
 
 const getAllOrders = catchAsync(async (req, res, next) => {
   const orders = await Order.find().select("orderItems");
@@ -164,8 +167,7 @@ const getAllOrders = catchAsync(async (req, res, next) => {
 
 //get all orders to the admin which are not delivered @@@@@@@complted checking
 const stats = catchAsync(async (req, res, next) => {
-
-  const username = "jabinvc"//   ;req.user;
+  const username = "jabinvc"; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
 
   const stats = await Order.aggregate([
@@ -188,12 +190,66 @@ const stats = catchAsync(async (req, res, next) => {
   res.status(200).json(stats);
 });
 
-//get all orders  of  user
+//update order by admin
+
+const updateOrder = catchAsync(async (req, res, next) => {
+
+  console.log("updating")
+  let userId;
+  const user =req.body.user;
+  if(req.body.user){
+
+   userId = await User.findOne({ username:user }).select("_id").exec();
+
+  }
+  const orderId = req.body.orderId;
+  const status = req.body.status;
+  const productId=req.body.productId;
+
+  const update = await Order.findOneAndUpdate(
+    { user: userId, "orderItems._id": orderId },
+
+    { $set: { "orderItems.$.deliveryStatus": status } }
+  );
+
+  if ( update && status === "delivered") {
+
+    //decrease the product quqntiy
+    console.log("first")
+    const product=await Product.findByIdAndUpdate(productId,{$inc : {quantity : -1} })
+  }
+
+  res.status(200).json("waiting for delivery");
+});
+
+//cancel order single single
+
+const deleteOrder = catchAsync(async (req, res, next) => {
+  const userId = req.user || req.body.user
+
+  const user = await User.findOne({ username:userId }).select("_id").exec();
+
+  const orderId = req.body.orderId;
+
+  console.log(req.body)
+
+  const update = await Order.findOneAndUpdate(
+    { user, "orderItems._id": orderId },
+
+    { $pull: { orderItems: { _id: orderId } } },
+    { multi: true }
+  );
+console.log(update)
+  res.json(update)
+});
 
 module.exports = {
   createOrder,
   getOrderByuser,
   getAllOrders,
   stats,
-  getDelivered
+  getDelivered,
+  AllDelivered,
+  updateOrder,
+  deleteOrder,
 };

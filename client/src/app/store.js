@@ -4,6 +4,8 @@ import authReducer from '../features/auth/authSlice';
 import filterReducer from '../features/filter/filterSlice';
 import cartReducer from '../features/cart/cartSlice';
 import orderReducer from '../features/order/orderSlice';
+import reviewReducer from '../features/review/reviewSlice';
+import uiReducer from '../features/ui/uiSlice';
 
 import storage from 'redux-persist/lib/storage';
 import {
@@ -16,6 +18,7 @@ import {
     PURGE,
     REGISTER,
   } from "redux-persist";
+import uiSlice from '../features/ui/uiSlice';
 
 
 const persistConfig = {
@@ -28,7 +31,9 @@ const persistConfig = {
     auth:authReducer,
     filter:filterReducer,
     cart:cartReducer,
-    order:orderReducer
+    order:orderReducer,
+    review:reviewReducer,
+    ui:uiSlice
 
    });
 

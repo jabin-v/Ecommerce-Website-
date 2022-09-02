@@ -3,8 +3,19 @@ import Progressbar from '../progressbar/Progressbar';
 import image1 from "../../images/products/sports-1.jpg";
 // import image1 from "../../images/products/sports-1.jpg";
 import './style.css'
+import { useDispatch } from 'react-redux';
+import { cancelOrder } from '../../features/order/orderSlice';
 
 const OrderDetail = ({orderItem}) => {
+  const dispatch=useDispatch();
+
+
+  const handleCancel=()=>{
+    
+
+    dispatch(cancelOrder(orderItem._id))
+
+  }
   return (
     <div>
          <div className='order-container'>
@@ -45,6 +56,11 @@ const OrderDetail = ({orderItem}) => {
               <b>Price :</b>
               ₹ { " "}{orderItem.price} / product
               </span>
+              {
+                orderItem.deliveryStatus === "delivered" ? "":
+                <button type='submit' onClick={handleCancel}>Cancel</button>
+
+              }
          
 
          

@@ -1,12 +1,23 @@
 const catchAsync = require("../util/catchAsync");
 const Review=require('../model/Review');
 const AppError = require("../util/appError");
+const User = require("../model/User");
 
 
 const createReview=catchAsync(async(req,res,next)=>{
+
+    const username = req.user; //   ;req.user;
+
+    console.log("user is",req.user)
+
+    const userId = await User.findOne({ username }).select("_id").exec();
+
+    req.body.user=userId;
     
 
 if(!req.body.product) req.body.product=req.params.productId;
+
+
 
 
 

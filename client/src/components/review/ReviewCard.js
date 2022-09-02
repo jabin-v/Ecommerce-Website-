@@ -5,6 +5,7 @@ import img2 from '../../images/testimonial-1.jpg'
 import './style.css'
 
 const ReviewCard = ({review,user,rating}) => {
+  
   return (
    <>
    <div className="review card-1">

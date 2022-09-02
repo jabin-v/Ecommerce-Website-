@@ -234,7 +234,10 @@ img{
     display:flex;
     flex-wrap:wrap;
 }
-
+.reviewbtn{
+    background:var(--salmon-pink)!important;
+    color:black!important
+}
 
 
 
