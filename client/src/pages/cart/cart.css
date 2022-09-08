@@ -12,7 +12,8 @@
     font-weight:var(--fw6);
     cursor:pointer;
     border:1px solid black;
-    color:var(--salmon-pink)
+    color:var(--salmon-pink);
+    margin-bottom:10px;
 }
 
 .bottom{

@@ -59,6 +59,11 @@
         font-size:15px;
         color:var(--salmon-pink)
       }
+
+      .offerpage{
+        /* border:1px solid red; */
+        height:calc(100vh - 30px)
+      }
       @media (min-width: 1024px) {
         .sidebar {
           --fs-5: 0.941rem;

@@ -12,8 +12,7 @@
     padding: 0;
     min-width: calc(25% - 15px);
     
- 
-  
+
 
     background: var(--white);
   
@@ -24,6 +23,12 @@
     /* visibility: hidden; */
       /* transition: 0.5s ease; */
     }
+
+    .sidebar-section{
+        padding:30px;
+    
+    }
+     
     .test{
         color:red;
         font-size:12px;
@@ -40,7 +45,16 @@
         color:var(--salmon-pink)
     }
 
-@media (max-width: 990px) {
+   
+ @media (max-width:479px) {
+    .search-responsive .product-grid{
+        margin:0 auto;
+
+    }
+
+ }
+
+@media (max-width:1024px) {
 
     .filter-sidebar{
         position: fixed;

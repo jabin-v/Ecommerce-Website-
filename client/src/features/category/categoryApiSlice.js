@@ -23,10 +23,6 @@ export const categoriesApiSlice=apiSlice.injectEndpoints({
                 console.log(responseData);
                 return categoriesAdapter.setAll(initialState,responseData.data)
             },
-            providesTags: (result, error, arg) => [
-                { type: 'Category', id: "LIST" }
-                
-            ]
         }),
 
         

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addProducts } from "../features/filter/filterSlice";
+import { addProducts } from "../features/product/productSlice";
+
 
 const BASE_URL = "http://localhost:3500/api/products/search";
 
@@ -42,7 +43,7 @@ if(p1.colors.in.length === 0){
         setProducts(data.data)
         
 
-        // dispatch(addProducts(data.data))
+        dispatch(addProducts(data.data))
 
         setIsLoading(false);
       });
@@ -58,18 +59,3 @@ if(p1.colors.in.length === 0){
 };
 
 export default useSearch;
-// const params={
-//     price:{
-//         gte:"100",
-//         lte:"10000"
-//     },
-//     colors:{
-//         in:["green","yellow"]
-
-//     },
-//     brand:["nike","addidas"],
-//     activity:{
-//         in:["mud"]
-//     }
-
-// }

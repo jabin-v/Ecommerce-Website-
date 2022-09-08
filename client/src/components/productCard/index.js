@@ -1,10 +1,9 @@
 import React from 'react'
 import './productCard.css'
-import image from '../../images/products/jacket-1.jpg'
 import { Link } from 'react-router-dom'
+import Rating from '@mui/material/Rating';
 
-
-const ProductMinimalCard = ({name,id,image,price}) => {
+const ProductMinimalCard = ({name,id,image,price,offer}) => {
   return (
     <Link to= {`product/${id}`} className="showcase">
 
@@ -18,7 +17,11 @@ const ProductMinimalCard = ({name,id,image,price}) => {
                         <h4 className="showcase-title">{name}</h4>
                       </span>
 
-                      <span className="showcase-category">Clothes</span>
+                      <span className="showcase-category">
+                     {
+                      offer &&  <Rating name="read-only" value={4} readOnly />
+                     }
+                      </span>
 
                       <div className="price-box">
                         <p className="price">₹ {" "}{price}</p>

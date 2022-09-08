@@ -1,0 +1,15 @@
+.img-item{
+    margin: 0.3rem;
+}
+.img-item img{
+    object-fit:cover;
+    max-height:200px;
+}
+.img-item:nth-child(1),
+.img-item:nth-child(2),
+.img-item:nth-child(3){
+    margin-right: 0;
+}
+.img-item:hover{
+    opacity: 0.8;
+}

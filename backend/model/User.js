@@ -24,7 +24,11 @@ const userSchema = new Schema({
     refreshToken: [String],
     address:{
         type:String
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      },
 });
 
 module.exports = mongoose.model('User', userSchema);

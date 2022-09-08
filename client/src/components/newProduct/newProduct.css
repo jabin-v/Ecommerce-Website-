@@ -18,6 +18,14 @@
     
   }
 
+  @media (max-width: 479px) {
+    .product-grid {
+        place-items:center;
+    }
+
+  }
+
+
   
 @media (min-width: 1024px) {
 

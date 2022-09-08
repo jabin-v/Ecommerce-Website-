@@ -6,6 +6,7 @@ import cartReducer from '../features/cart/cartSlice';
 import orderReducer from '../features/order/orderSlice';
 import reviewReducer from '../features/review/reviewSlice';
 import uiReducer from '../features/ui/uiSlice';
+import productsReducer from '../features/product/productSlice';
 
 import storage from 'redux-persist/lib/storage';
 import {
@@ -33,7 +34,8 @@ const persistConfig = {
     cart:cartReducer,
     order:orderReducer,
     review:reviewReducer,
-    ui:uiSlice
+    ui:uiReducer,
+    products:productsReducer
 
    });
 

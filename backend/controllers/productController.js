@@ -2,6 +2,7 @@ const Product = require("../model/Product");
 const slugify = require("slugify");
 const catchAsync = require("../util/catchAsync");
 const APIFeatures = require("../util/APIFeatures");
+const { findByIdAndDelete } = require("../model/User");
 
 //-----------------product create--------------------------//
 
@@ -59,9 +60,9 @@ const getAllProducts = catchAsync(async (req, res, next) => {
       path: "category",
       select: "-__v -parentId ",
     })
-    .sort("-createdAt");
+    .sort("-updatedAt");
 
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     data: products,
   });
@@ -129,44 +130,98 @@ const getProductById = catchAsync(async (req, res, next) => {
   });
 });
 
-const updateProduct = catchAsync(async (req, res, next) => {
+const removeImage=catchAsync(async(req,res,next)=>{
+
+  console.log(req.body)
+
+ 
+
+  const product=await Product.findByIdAndUpdate(req.body.id,
+    { $pull: { images:  {url:req.body.image} } }
+  ,{
+    new:true,
+    runValidators:true
+    
+  })
+
   res.status(200).json({
     status: "successfully updated product",
+    data:{
+      product
+    }
+  });
+
+})
+
+const updateProduct = catchAsync(async (req, res, next) => {
+
+  console.log(req.body)
+
+  const {
+    name,
+    price,
+    category,
+    description,
+    response,
+    quantity,
+    sizes,
+    brand,
+    colors,
+    offers,
+    activity,
+    isFeatured,
+  } = req.body;
+
+  console.log(req.body)
+
+
+  const productObj = {
+    name,
+    slug: slugify(name),
+    price,
+    images: response,
+    category,
+    description,
+    colors,
+    availableSizes: sizes,
+    quantity,
+    brand,
+    activity,
+    offers,
+    isFeatured,
+
+    updatedAt: new Date(),
+  };
+  
+
+  const product=await Product.findByIdAndUpdate(req.body.id,{...req.body,slug:slugify(req.body.name)},{
+    new:true,
+    runValidators:true
+  })
+
+
+  res.status(200).json({
+    status: "successfully updated product",
+    data:{
+      product
+    }
   });
 });
 
-//=======================aggregation=======================================//
+
+const deleteProduct=catchAsync(async(req,res,next)=>{
+
+  console.log(req.body.id)
+
+
+const deleted=await Product.findByIdAndDelete(req.body.id)
+
+
+  res.status(204).json("deleted suuceessfully")
+})
+
 
 //=======================aggregation=======================================//
-
-// products overall stats
-// const productStats = catchAsync(async (req, res, next) => {
-//   const stats = await Product.aggregate([
-//     {
-//       $match: { ratingsAverage: { $gte: 4.5 } },
-//     },
-//     {
-//       $group: {
-//         _id: null,
-//         num: { $sum: 1 },
-//         avgRating: { $avg: "$ratingsAverage" },
-//         avgPrice: { $avg: "$price" },
-//         minPrice: { $min: "$price" },
-//         maxPrice: { $max: "$price" },
-//       },
-//     },
-//     {
-//       $sort: { avgPrice: 1 },
-//     },
-//   ]);
-
-//   res.status(200).json({
-//     status: "success",
-//     data: {
-//       stats,
-//     },
-//   });
-// });
 const productStats = catchAsync(async (req, res, next) => {
   const property = req.params.property;
 
@@ -228,4 +283,6 @@ module.exports = {
   aliasFeaturedProduct,
   productStats,
   ProductsStatsByPropery,
+  deleteProduct,
+  removeImage
 };

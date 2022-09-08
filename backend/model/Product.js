@@ -43,6 +43,8 @@ const productSchema=new Schema({
     },
     images: {
         type: Array,
+        minItems: 2,
+        maxItems: 10, 
     },
    
     availableSizes:{

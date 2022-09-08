@@ -22,12 +22,30 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Order from "./pages/order";
 import ReviewsAll from "./pages/reviewExpand";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentToken } from "./features/auth/authSlice";
+import { useEffect } from "react";
+import store from "./app/store";
+import { fetchCarts, getTotal } from "./features/cart/cartSlice";
 
 const promise = loadStripe(
   "pk_test_51Lbc37SHvbvS7ni9d15S2L8TSciI1RRzECCfnySKUnnaZO7Ulm4eGcgAzWy8WekYgCdX1GNhdY4ntNhfuMNigep600vVgzxUSu"
 );
 
 function App() {
+  const token = useSelector(selectCurrentToken);
+  const dispatch = useDispatch();
+
+  // dispatchh get iyems
+  useEffect(() => {
+    if (token) {
+      console.log("token");
+      dispatch(fetchCarts());
+      dispatch(getTotal());
+     
+    }
+  }, [token]);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -37,20 +55,8 @@ function App() {
         <Route index element={<Home />} />
 
         <Route path="/product/:productId" element={<ProductDetail />} />
-       
 
-        
-        <Route path="/user/cart" element={<Cart />} />
-        <Route
-          path="/user/cart-checkout"
-          element={
-            <Elements stripe={promise}>
-              <Checkout />
-            </Elements>
-          }
-        />
-
-         <Route path="/user/order" element={<Order/>}/>
+        <Route path="/user/order" element={<Order />} />
 
         <Route path="/search" element={<Search />} />
         <Route path="/success" element={<Success />} />
@@ -74,6 +80,15 @@ function App() {
         {/* ========= protected admin pages ============ */}
         <Route element={<RequireAuth allowedRoles={[5150, 2001]} />}>
           <Route path="/user/checkout-success" element={<CheckoutSuccess />} />
+          <Route
+            path="/user/cart-checkout"
+            element={
+              <Elements stripe={promise}>
+                <Checkout />
+              </Elements>
+            }
+          />
+          <Route path="/user/cart" element={<Cart />} />
 
           <Route path="/private" element={<Private />} />
           <Route path="/userslist" element={<UsersList />} />

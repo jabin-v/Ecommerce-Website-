@@ -5,9 +5,9 @@ import Brands from "../../components/brands";
 import Colors from "../../components/colors";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
-import NewProduct from "../../components/newProduct/NewProduct";
 import Ratings from "../../components/Rating";
 import Size from "../../components/size";
+import CloseIcon from '@mui/icons-material/Close';
 import {
   selectAllCategories,
   useGetCategoriesQuery,
@@ -54,12 +54,12 @@ useEffect(()=>{
 
   return (
     <>
-      <Header search />
+      <Header search setVisible={setVisible}  />
       <div className="product-container">
         <div className="container">
           <div className="sidebar has-scrollbar" style={styles.sidebar}>
             <div
-              className="sidebar-category  has-scrollbar"
+              className="sidebar-section"
               style={{ height: "100vh" }}
             >
               <div className="sidebar-top">
@@ -69,8 +69,10 @@ useEffect(()=>{
 
                 <button
                   className="sidebar-close-btn"
-                  data-mobile-menu-close-btn
-                ></button>
+                  onClick={()=>setVisible(false)}
+                >
+                  <CloseIcon/>
+                </button>
               </div>
               <div className="sidebar-bottom">
                 <div className="filter-section">
@@ -113,7 +115,7 @@ useEffect(()=>{
             </div>
           </div>
 
-          <div className="search-container">
+          <div className="search-container search-responsive">
             {
               isLoading ? <p>LOading.......</p> : <Products result={products}/>
             }

@@ -26,8 +26,14 @@ router
   .route("/")
   .post(productController.createProduct)
   .get(productController.getAllProducts)
-  .put(productController.updateProduct);
+  .delete(productController.deleteProduct)
+  .put(productController.updateProduct)
+  
+  router.route("/removeimage")
+  .patch(productController.removeImage) 
 
-router.route("/:id").get(productController.getProductById);
+router.route("/:id")
+.get(productController.getProductById)
+
 
 module.exports = router;

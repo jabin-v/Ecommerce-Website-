@@ -10,8 +10,10 @@ import {
 import { category, keyword } from "../../features/filter/filterSlice";
 import useSearch from "../../hooks/useSearch";
 import "./header.css";
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
-const Header = ({search}) => {
+const Header = ({search,setVisible}) => {
   
   const {
     data: cat,
@@ -19,12 +21,21 @@ const Header = ({search}) => {
     isSuccess,
     isError,
     error,
-  } = useGetCategoriesQuery();
+  } = useGetCategoriesQuery({
+    pollingInterval: 60000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  }
+    
+  );
 
   const categoryLIst = useSelector(selectAllCategories);
   const cart = useSelector((state) => state.cart.cartTotalQuantity);
   const token = useSelector(selectCurrentToken);
   const [query, setQuery] = useState("");
+  const [open,setOpen]=useState(false);
+
+ 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -82,17 +93,15 @@ const Header = ({search}) => {
 
   return (
     <header>
-      <div className="header-top mobile-hide">
+      <div className="header-top ">
         <div className="container">
           <div className="wrapper flexitem">
             <div className="left">
-              <ul className="flexitem main-links">
-
-                <li>
-                  <a href="#">wishlist</a>
-                </li>
-              </ul>
+           {
+            !open &&  <ArrowCircleRightIcon className="search-arrow" onClick={()=>setOpen(true)}/>
+           }
             </div>
+           
             {
               search ?
               <div className="header-search-container">
@@ -109,34 +118,64 @@ const Header = ({search}) => {
               </button>
             </div>:<div></div>
             }
-            <div className="right">
-              <ul className="flexitem main-links">
-                <li>{!token && <Link to="/register">Sign Up</Link>}</li>
-                <li>{!token && <Link to="/login">Login</Link>}</li>
-                <li>{token && <Link to="/user/order">Order tracking</Link>}</li>
-                <li>
-                  {token && (
-                    <span onClick={handleLogout} style={{ cursor: "pointer" }}>
-                      Logout
-                    </span>
-                  )}
-                </li>
-                <li>
-                  <a href="#">
-                    English <i className="ri-arrow-down-s-line"></i>
-                  </a>
-                </li>
-              </ul>
+            <div className="right actions">
+             
+             <ul className="flexitem main-links">
+              <li>{!token && <Link to="/register">Sign Up</Link>}</li>
+              <li>{!token && <Link to="/login">Login</Link>}</li>
+              <li>{token && <Link to="/user/order">Order tracking</Link>}</li>
+              <li>
+                {token && (
+                  <span onClick={handleLogout} style={{ cursor: "pointer" }}>
+                    Logout
+                  </span>
+                )}
+              </li>
+            </ul>
+             
             </div>
+           
+              
+           {
+            open && 
+            <div className="search-sidebar">
+
+            <div className="">
+             
+             <ul className="flexitem main-links">
+              <li>{!token && <Link to="/register">Sign Up</Link>}</li>
+              <li>{!token && <Link to="/login">Login</Link>}</li>
+              <li>{token && <Link to="/user/order">Orders</Link>}</li>
+              <li>
+                {token && (
+                  <span onClick={handleLogout} style={{ cursor: "pointer" }}>
+                    Logout
+                  </span>
+                )}
+              </li>
+              <li>
+                <CloseIcon onClick={()=>setOpen(false)}/>
+              </li>
+            </ul>
+             
+            </div>
+                
+
+              </div>
+           }
+            
           </div>
         </div>
       </div>
       <div className="header-nav">
         <div className="container header-list">
           <div className="wrapper flexitem">
-            <a href="#" className="trigger desktop-hide">
-              <i className="ri-menu-line"></i>
-            </a>
+        {
+         search &&  <span className="trigger desktop-hide" onClick={()=>setVisible(true)} style={{cursor:"pointer"}}> 
+          <i className="ri-menu-line"></i>
+            </span>
+        }   
+             
             <div className="left flexitem">
               <div className="logo">
                 <Link to="/">
@@ -153,13 +192,7 @@ const Header = ({search}) => {
             </div>
             <div className="right">
               <ul className="flexitem second-links">
-                <li>
-                  <a href="#">
-                    <div className="icon-large">
-                      <i className="ri-heart-line"></i>
-                    </div>
-                  </a>
-                </li>
+
                 <li>
                   <Link to="/user/cart" className="iscart">
                     <div className="icon-large">

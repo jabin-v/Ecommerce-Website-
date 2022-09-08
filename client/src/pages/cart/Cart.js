@@ -30,8 +30,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const token=useSelector(selectCurrentToken);
 
-  console.log(KEY)
-
   const [stripeToken, setStripeToken] = useState(null);
 
   const navigate=useNavigate();
@@ -40,11 +38,7 @@ const Cart = () => {
 
   const cart = useSelector(selectCart);
 
-  const cartStats = useSelector((state) => state.cart);
-
-  console.log(cartStats);
-
- 
+  const cartStats = useSelector((state) => state.cart)
 
   useEffect(() => {
     dispatch(fetchCarts());
@@ -114,7 +108,7 @@ const Cart = () => {
             <h1>Your bag</h1>
           </div>
           <div className="top">
-            <button className="cart-btn">Continue shoppping</button>
+           <Link to="/search"> <button className="cart-btn">Continue shoppping</button> </Link>
 
             {/* <button className='cart-btn'>Checkout</button> */}
           </div>
@@ -123,6 +117,7 @@ const Cart = () => {
               {cart.map((item) => (
                 <div key={item._id}>
                   <div className="cart-products">
+                    <Link to={`/product/${item.product._id}`}>
                     <div className="cart-product-detail">
                       <img src={item.product.images[0].url} />
                       <div className="cart-details">
@@ -140,14 +135,15 @@ const Cart = () => {
                         </span>
                       </div>
                     </div>
+                    </Link>
                     <div style={{ display: "flex" }}>
                       <div className="cart-price-detail">
                         <div className="cart-amount-container">
-                          <AddIcon />
+                          
                           <div className="cart-product-amount">
                             {item.quantity}
                           </div>
-                          <MinimizeIcon />
+                          
                         </div>
                         <div className="prod-price">{item.product.price}</div>
                       </div>

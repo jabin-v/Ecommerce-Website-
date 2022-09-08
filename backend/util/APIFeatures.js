@@ -83,7 +83,7 @@ class APIFeatures{
        this.query=this.query.sort(sortBy);
        //in case there is tie sort('price ratingsAvg)
    }else{
-    this.query=this.query.sort("-createdAt")
+    this.query=this.query.sort("-updatedAt")
    }
   
    return this;
