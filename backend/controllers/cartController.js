@@ -6,7 +6,7 @@ const User = require("../model/User");
 const getCart = catchAsync(async (req, res, next) => {
   ///================//
 
-  console.log("verifying")
+  
   const username = req.user; //   ;req.user;
 
   const userId = await User.findOne({ username }).select("_id").exec();
@@ -22,12 +22,12 @@ const getCart = catchAsync(async (req, res, next) => {
       "cartItems.product",
       "_id name price images"
     );
-    console.log(cart);
+    
   } else {
     return res.status(204).json("cart is empty");
   }
 
-  console.log(cart);
+
 
   res.status(200).json({
     data: cart,
@@ -40,9 +40,9 @@ const addToCart = catchAsync(async (req, res, next) => {
   const username = req.user; //   ;req.user;
   
 
-  console.log("items", req.body.cartItems);
+ 
   const addProduct = req.body.cartItems.product;
-  console.log(addProduct)
+
   const addColor = req.body.cartItems.color;
   const addSize = req.body.cartItems.size;
 
@@ -60,7 +60,7 @@ const addToCart = catchAsync(async (req, res, next) => {
 
     );
 
-    console.log(existingProduct)
+    
 
     // item.product === addProduct && item.color === addCcolor && item.size === addsize
 

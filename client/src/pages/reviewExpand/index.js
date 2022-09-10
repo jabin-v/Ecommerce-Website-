@@ -9,7 +9,7 @@ import "./style.css";
 const ReviewsAll = () => {
   const reviews = useSelector(selectAllReviews);
 
-  console.log(reviews)
+
   return (
     <div>
       <Header />

@@ -67,7 +67,7 @@ export const addToCart = createAsyncThunk(
         },
       };
       const response = await axios.post(CART_URL, { cartItems }, config);
-      console.log(response)
+     
 
       return response.data;
     } catch (error) {
@@ -82,7 +82,7 @@ export const addToCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   "cart/removeCart",
   async (data, { getState, rejectWithValue }) => {
-    console.log(data);
+   
     const { auth } = getState();
 
     try {
@@ -99,7 +99,7 @@ export const removeFromCart = createAsyncThunk(
         },
       };
       const response = await axios.patch(CART_URL, payload, config);
-      console.log(response);
+    
 
       return data;
     } catch (error) {
@@ -148,7 +148,7 @@ const cartSlice = createSlice({
   reducers: {
     addItem: {
       reducer(state, action) {
-        console.log(action.payload);
+       
         const existingIndex = state.cartItems.findIndex(
           (item) => item.product._id === action.payload.product._id
         );
@@ -170,7 +170,7 @@ const cartSlice = createSlice({
         addedColor,
         addedSize
       ) {
-        console.log(addedProductId);
+        
 
         return {
           payload: {
@@ -189,6 +189,8 @@ const cartSlice = createSlice({
       },
     },
     getTotal(state, action) {
+
+    
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const price = cartItem.product.price;
@@ -212,12 +214,12 @@ const cartSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchCarts.fulfilled, (state, { payload }) => {
-        console.log(payload);
+      
 
         state.cartItems = payload;
       })
       .addCase(addToCart.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         const data = action.payload;

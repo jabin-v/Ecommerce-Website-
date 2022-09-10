@@ -20,7 +20,7 @@ const [response,error,isLoading]=UseAxios({
 
 const dispatch=useDispatch();
 
-console.log(response)
+
 
 
 

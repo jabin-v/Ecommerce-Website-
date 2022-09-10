@@ -8,8 +8,8 @@ const RequireAuth = ({allowedRoles}) => {
 
     const token=useSelector(selectCurrentToken);
     const roles=useSelector(selectCurrentRoles);
-    console.log(token)
-    // console.log(roles)
+   
+  
     const location=useLocation();
 
   return (

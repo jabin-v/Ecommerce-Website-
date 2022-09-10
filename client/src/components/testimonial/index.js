@@ -4,18 +4,18 @@ import "./style.css"
 const Testimonial = ({image,title,content,name}) => {
   return (
     
-    <div class="testimonial">
+    <div className="testimonial">
 
-    <div class="testimonial-card">
+    <div className="testimonial-card">
 
-      <img src={image} alt="alan doe" class="testimonial-banner" width="80" height="80"/>
+      <img src={image} alt="alan doe" className="testimonial-banner" width="80" height="80"/>
 
-      <p class="testimonial-name">{name}</p>
+      <p className="testimonial-name">{name}</p>
 
-      <p class="testimonial-title">{title}</p>
+      <p className="testimonial-title">{title}</p>
 
 
-      <p class="testimonial-desc">
+      <p className="testimonial-desc">
      {
       content
      }

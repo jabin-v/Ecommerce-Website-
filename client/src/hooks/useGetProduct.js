@@ -14,8 +14,7 @@ const useGetProduct = () => {
     const getSingleProduct = useCallback(() => {
         setIsLoading(true);
         axios.get(`${BASE_URL}/${path}`).then(response => {
-            console.log(response.data.data)
-           
+            
             setSingleProduct(response.data.data);
         });
     }, [path]);

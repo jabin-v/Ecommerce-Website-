@@ -14,8 +14,7 @@ const Paybutton = ({cartItems}) => {
 
     const handleCheckout=async()=>{
 
-        console.log(token);
-        console.log(user)
+       
 
         
 
@@ -31,7 +30,7 @@ const Paybutton = ({cartItems}) => {
     })
 
 
-    console.log(response)
+   
 
     if(response.data.url){
         window.location.href=response.data.url

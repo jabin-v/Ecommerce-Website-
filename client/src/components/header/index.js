@@ -34,7 +34,7 @@ const Header = ({search,setVisible}) => {
   const token = useSelector(selectCurrentToken);
   const [query, setQuery] = useState("");
   const [open,setOpen]=useState(false);
-
+ 
  
 
   const navigate = useNavigate();
@@ -50,10 +50,10 @@ const Header = ({search,setVisible}) => {
   }, [query]);
 
 
-  console.log(cart);
+
 
   const handleClick = (categoryId) => {
-    console.log(categoryId);
+ 
 
     dispatch(category([categoryId]));
 

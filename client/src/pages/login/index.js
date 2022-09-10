@@ -7,6 +7,7 @@ import { useLoginMutation } from '../../features/auth/authApiSlice';
 import { Link,useNavigate,useLocation } from 'react-router-dom';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
+import { fetchCarts, getTotal } from '../../features/cart/cartSlice';
 
 
 
@@ -47,11 +48,13 @@ const Login = () => {
         try {
             const userData=await login({username:user,password:pwd}).unwrap();
 
-            dispatch(setCredentials({...userData,user}))
+            dispatch(setCredentials({...userData,user}));
+           
             setUser('');
             setPwd('');
             
             navigate(from,{replace:true})
+            dispatch()
         } catch (err) {
             // console.log("error")
             // console.log(err)

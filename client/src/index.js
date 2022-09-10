@@ -13,8 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { fetchCarts, getTotal } from './features/cart/cartSlice';
 
  
- store.getState().auth.token &&  store.dispatch(fetchCarts());;
- store.getState().auth.token &&   store.dispatch(getTotal());
+
 
 
 

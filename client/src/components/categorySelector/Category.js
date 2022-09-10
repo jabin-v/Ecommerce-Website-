@@ -32,7 +32,7 @@ const createCategoryList = (categories, options = []) => {
     dispatch(category(selectedCats))
   },[selectedCats])
 
-  console.log(selectedCats)
+ 
 
 
 
@@ -56,7 +56,7 @@ const  handleCategoryChange=(e)=>{
 }
 
 
-console.log(selectedCats)
+
 
 
   return (

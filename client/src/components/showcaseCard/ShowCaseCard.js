@@ -50,7 +50,7 @@ const ShowCaseCard = ({
       );
     }
 
-    console.log(response);
+    
   };
 
 

@@ -22,7 +22,7 @@ const createProduct = catchAsync(async (req, res, next) => {
     isFeatured,
   } = req.body;
 
-  console.log(req.body)
+ 
 
 
   const productObj = {
@@ -94,7 +94,7 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
 
 
   req.query.fields = "name,price,ratingsAverage,images";
-  console.log(req.query)
+
 
   const features = new APIFeatures(Product.find(), req.query)
     .search()
@@ -132,7 +132,7 @@ const getProductById = catchAsync(async (req, res, next) => {
 
 const removeImage=catchAsync(async(req,res,next)=>{
 
-  console.log(req.body)
+
 
  
 
@@ -155,7 +155,7 @@ const removeImage=catchAsync(async(req,res,next)=>{
 
 const updateProduct = catchAsync(async (req, res, next) => {
 
-  console.log(req.body)
+ 
 
   const {
     name,
@@ -172,7 +172,7 @@ const updateProduct = catchAsync(async (req, res, next) => {
     isFeatured,
   } = req.body;
 
-  console.log(req.body)
+ 
 
 
   const productObj = {
@@ -211,7 +211,7 @@ const updateProduct = catchAsync(async (req, res, next) => {
 
 const deleteProduct=catchAsync(async(req,res,next)=>{
 
-  console.log(req.body.id)
+  
 
 
 const deleted=await Product.findByIdAndDelete(req.body.id)

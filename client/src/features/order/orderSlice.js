@@ -21,8 +21,7 @@ export const createOrder=createAsyncThunk("order/create",async(order,{getState,r
             },
           };
           const response = await axios.post(ORDER_URL,{order}, config);
-        //   return response.data
-        console.log(response.data)
+       
 
         
     } catch (error) {
@@ -91,7 +90,7 @@ export const getRecentlyDelivered=createAsyncThunk("order/delivered",async(arg,{
             },
           };
           const response = await axios.get(`${ORDER_URL}/delivered`,config);
-          console.log(response)
+         
           return response.data
        
 
@@ -109,7 +108,7 @@ export const cancelOrder=createAsyncThunk("order/cancel",async(orderId,{getState
 
   const {auth}=getState();
 
-console.log(orderId)
+
   try {
       const config = {
           headers: {
@@ -117,7 +116,7 @@ console.log(orderId)
           },
         };
         const response = await axios.patch(`${ORDER_URL}/cancelorder`,{orderId},config);
-        console.log(response)
+       
         return {response:response.data,orderId
      }
 
@@ -144,7 +143,7 @@ const orderSlice=createSlice({
       .addCase(getAllPendingOrders.fulfilled, (state, { payload }) => {
 
     //    const check= Array.isArray(state.orders)
-       console.log(typeof (state.orders))
+       
 
         state.orders=payload;
 

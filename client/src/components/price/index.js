@@ -31,7 +31,7 @@ const Price = () => {
 
   },[value])
 
-  console.log(value);
+ 
   return (
     <div>
       <FormControl>

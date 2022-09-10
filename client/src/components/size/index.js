@@ -19,7 +19,7 @@ const [property,error,isLoading]=UseAxios({
 
 const dispatch=useDispatch();
 
-console.log(property)
+
 
 const [sizes, setSizes] = useState([]);
 

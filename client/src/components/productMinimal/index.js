@@ -9,7 +9,7 @@ const ProductMinimal = ({title,data}) => {
 
   //*************props.data is the data for the box */
 
-  console.log(data)
+
 
 
 

@@ -18,7 +18,7 @@ const NewProduct = () => {
     },
   });
 
-  console.log("new.......",newArrival)
+ 
 
 
   return (

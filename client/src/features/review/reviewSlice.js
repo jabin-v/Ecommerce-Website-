@@ -64,12 +64,12 @@ export const addReview = createAsyncThunk(
       };
       const response = await axios.post(REVIEW_URL, { ...data }, config);
       const newReview=response.data.data.newReview;
-      console.log(newReview)
+   
       const newData={...newReview,user:{
         username:auth.user
       }}
 
-      console.log(newData)
+      
 
       return newData;
 
@@ -158,7 +158,7 @@ const reviewSlice = createSlice({
   reducers: {
 
    productReview(state,action){
-    console.log(action.payload)
+   
 
 
     state.reviews=action.payload
@@ -168,7 +168,7 @@ const reviewSlice = createSlice({
   extraReducers(builder){
     builder
     .addCase(addReview.fulfilled, (state, { payload }) => {
-        console.log(payload);
+       
 
         state.reviews.push(payload)
       })

@@ -16,12 +16,11 @@ const ImageSlider = ({singleProduct}) => {
     },[])
 
     
-    console.log(width)
-    console.log(window.innerWidth)
+   
 
     useEffect(() => {
         function handleResize() {
-            console.log("resize")
+            
             setWidth(ref.current.offsetWidth);
         }
 
@@ -34,7 +33,7 @@ const ImageSlider = ({singleProduct}) => {
   
     const slideImage = (imgId) => {
 
-        console.log("first")
+  
         
        
         document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * width}px)`;

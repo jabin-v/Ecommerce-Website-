@@ -5,7 +5,7 @@ const UseAxios=(configObj)=>{
 
     const {axiosInstance,method,url,requestConfig={}}=configObj;
 
-    console.log(requestConfig);
+   
 
     const [response,setResponse]=useState([]);
     const [error,setError]=useState("");
@@ -46,7 +46,7 @@ const UseAxios=(configObj)=>{
     },[])
 
 
-    console.log("axios",response)
+   
 
 
 

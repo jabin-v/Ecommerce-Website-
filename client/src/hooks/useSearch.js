@@ -30,7 +30,7 @@ if(p1.colors.in.length === 0){
 
 
   const getProducts = () => {
-    console.log("run");
+   
     setIsLoading(true);
 
     axios
@@ -38,7 +38,7 @@ if(p1.colors.in.length === 0){
         params:p1,
       })
       .then(({ data }) => {
-        console.log(data.data);
+        
 
         setProducts(data.data)
         

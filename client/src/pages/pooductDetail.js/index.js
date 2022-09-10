@@ -64,15 +64,15 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (token) {
-      console.log("useefeefkkmk");
+     
       const itemIndex = delivered?.findIndex(
         (item) => item.orderItems.product === singleProduct?._id
       );
 
-      console.log(itemIndex);
+     
 
       if (itemIndex >= 0) {
-        console.log("running...........");
+       
         setCanReview(true);
       } else {
         setCanReview(false);
@@ -80,7 +80,7 @@ const ProductDetail = () => {
     }
   }, [singleProduct, canReview]);
 
-  console.log(canReview);
+  
 
   const handleChange = (event) => {
     setSelectedColor(event.target.value);
@@ -126,12 +126,11 @@ const ProductDetail = () => {
       })
     ).unwrap();
 
-    console.log(response);
+    
 
 
     if (response.cartItems) {
-      console.log(selectedsize);
-      console.log(selectedColor);
+      
       const itemIndex = response.cartItems.findIndex(
         (item) =>
           item.product === singleProduct._id &&
@@ -139,7 +138,7 @@ const ProductDetail = () => {
           item.size === selectedsize
       );
 
-      console.log(itemIndex);
+     
 
       const addedProductId = response.cartItems[itemIndex].product;
       const doc_Id = response.cartItems[itemIndex]._id;
@@ -150,7 +149,7 @@ const ProductDetail = () => {
       const price = singleProduct.price;
       const name = singleProduct.name;
 
-      console.log(image1);
+     
 
       dispatch(
         addItem(

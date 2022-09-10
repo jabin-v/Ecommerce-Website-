@@ -16,7 +16,7 @@ const SideBar = () => {
     
   return (
     <div className='sidebar has-scrollbar offerpage' >
-    <h2 class="title">testimonial</h2>
+    <h2 className="title">testimonial</h2>
     <Testimonial 
     image="https://media.istockphoto.com/photos/closeup-portrait-of-her-she-nice-attractive-puzzled-ignorant-girl-picture-id1132758418?k=20&m=1132758418&s=612x612&w=0&h=ca6WVDDblf3um3mdfCSGVpLGfwuyjj5UTLD9rMMHfH4=" 
     content="Merit and her team did an exceptional job with my sons website. They are very professional and made his website easy for clients to scroll through. I highly recommend Digital Design Solutions. They are a top notch company. " 

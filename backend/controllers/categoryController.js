@@ -82,10 +82,10 @@ const updateCategory = catchAsync(async (req, res, next) => {
       { new: true }
     );
 
-    console.log("test", categoryTest);
+    
   });
 
-  console.log("list", updatedCategoryList);
+ 
 
   return res.status(200).json({
     status: "success",

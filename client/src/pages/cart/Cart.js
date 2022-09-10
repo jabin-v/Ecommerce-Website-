@@ -48,11 +48,10 @@ const Cart = () => {
     dispatch(getTotal());
   }, [cart, dispatch]);
 
-  console.log(cart);
+
 
   const handleRemoveCart = (id) => {
-    console.log("clicked on remove");
-    console.log(id);
+    
 
     dispatch(removeFromCart(id)).unwrap();
   };
@@ -60,8 +59,7 @@ const Cart = () => {
 
   const onToken = (token) => {
     setStripeToken(token);
-    console.log("token")
-    console.log(token)
+   
   };
   useEffect(() => {
     const makeRequest = async () => {
@@ -77,7 +75,6 @@ const Cart = () => {
           }
     })
 
-    console.log(res.data)
 
     }
 
@@ -128,7 +125,10 @@ const Cart = () => {
                         <span className="cart-product-id">
                           <b>ID :</b>789456
                         </span>
-                        <div className="cart-product-color">{item.color}</div>
+                        <div className="cart-product-color">
+                          <b>Color:</b>
+                          {"  "}{item.color}
+                          </div>
                         <span className="cart-product-size">
                           <b>Size :</b>
                           {item.size}

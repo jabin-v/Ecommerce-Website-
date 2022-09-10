@@ -21,7 +21,7 @@ const createOrder = catchAsync(async (req, res, next) => {
     paidAt: Date.now(),
   });
 
-  console.log(order);
+ 
   res.status(201).json({
     success: true,
     order,
@@ -32,7 +32,6 @@ const getOrderByuser = catchAsync(async (req, res, next) => {
   const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
 
-  console.log(userId);
 
   const orders = await Order.aggregate([
     {
@@ -64,7 +63,7 @@ const getDelivered = catchAsync(async (req, res, next) => {
   const userId = await User.findOne({ username }).select("_id").exec();
   const date = new Date(2022 - 08 - 31);
 
-  console.log(userId);
+ 
 
   const orders = await Order.aggregate([
     {
@@ -91,7 +90,7 @@ const getDelivered = catchAsync(async (req, res, next) => {
   res.status(200).json(orders);
 });
 const AllDelivered = catchAsync(async (req, res, next) => {
-  console.log("first");
+ 
 
   const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
@@ -154,22 +153,22 @@ const stats = catchAsync(async (req, res, next) => {
 //update order by admin
 
 const updateOrder = catchAsync(async (req, res, next) => {
-  console.log(req.body);
 
-  // console.log("updating");
+
+  
   let userId;
   const user = req.body.user;
   if (req.body.user) {
     userId = await User.findOne({ username: user }).select("_id").exec();
   }
 
-  // console.log(userId);
+  
   const orderId = req.body.orderId;
   const status = req.body.status;
   const productId = req.body.productId;
   const count = req.body.quantity;
 
-  // console.log("==========",count)
+
 
   const update = await Order.findOneAndUpdate(
     { user, "orderItems._id": orderId },
@@ -179,7 +178,7 @@ const updateOrder = catchAsync(async (req, res, next) => {
 
   if (update && status === "delivered") {
     //decrease the product quqntiy
-    console.log("first");
+  
     const product = await Product.findByIdAndUpdate(productId, {
       $inc: { quantity: -count },
     });
@@ -195,13 +194,13 @@ const deleteOrder = catchAsync(async (req, res, next) => {
     req.body.user ||
     (await User.findOne({ username: req.user }).select("_id").exec());
 
-  console.log(userId);
+ 
 
   // const user = await User.findOne({ username:userId }).select("_id").exec();
 
   const orderId = req.body.orderId;
 
-  console.log(req.body);
+
 
   const update = await Order.findOneAndUpdate(
     { user: userId, "orderItems._id": orderId },
@@ -317,29 +316,6 @@ const productYearlySales = catchAsync(async (req, res, next) => {
       $unwind: "$orderItems",
     },
     { $match: { "orderItems.product" : "62fa34a6cb4c3ec31b2a5ba4"  } },
-    // {
-    //   $group:{
-    //     _id:"$orderItems.product"
-    //   }
-    // }
-
-    // {
-    //   $project: {
-    //     month: { $month: "$createdAt" },
-    //     sales:"$totalPrice"
-    //   },
-    // },
-    // {
-    //   $group: {
-    //     _id: "$month",
-    //     total: { $sum: "$sales" },
-    //   },
-    // },
-    // {
-    //   $sort:{
-    //     _id:1
-    //   }
-    // }
 
   ])
 

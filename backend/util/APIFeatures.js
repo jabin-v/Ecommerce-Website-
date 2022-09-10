@@ -30,7 +30,7 @@ class APIFeatures{
        //BUILD QUERY
 
 
-       console.log(this.queryString)
+      
 
        
   

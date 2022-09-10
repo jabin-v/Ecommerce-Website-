@@ -35,7 +35,7 @@ useEffect(()=>{
   if(location.state){
 
     dispatch(category([location.state.catId]))
-    console.log(location.state.catId)
+   
   }
 
 },[location.state])

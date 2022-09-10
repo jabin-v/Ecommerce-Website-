@@ -56,7 +56,7 @@ const getStats=catchAsync(async(req,res,next)=>{
 
 const stats=catchAsync(async(req,res,next)=>{
 
-    console.log("first")
+  
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
     const data = await User.aggregate([

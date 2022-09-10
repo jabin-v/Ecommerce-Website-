@@ -17,9 +17,6 @@ const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
   const dispatch = useDispatch();
 
-  
-
-  console.log(cart);
 
   const elements = useElements();
   const stripe = useStripe();
@@ -37,7 +34,7 @@ const Checkout = () => {
           },
         }
       );
-      console.log(data.data.client_secret);
+     
       setClientSecret(data.data.client_secret);
     };
 
@@ -129,7 +126,7 @@ const Checkout = () => {
     }
   })
 
-  console.log(orderItems)
+ 
 
   const order={
     shippingInfo:address,
@@ -153,7 +150,7 @@ const Checkout = () => {
         return;
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          console.log(result);
+         
           order.paymentInfo={
             status:result.paymentIntent.status,
             id:result.paymentIntent.id
@@ -175,7 +172,7 @@ const Checkout = () => {
 
   const onChange = (e) => {
     setAdress({ ...address, [e.target.name]: e.target.value });
-    console.log(address);
+    
   };
 //================================================================//
 

@@ -11,8 +11,7 @@ const Review = ({ setVisible,productId}) => {
   const [review, setReview] = useState(null);
   const dispatch=useDispatch();
 
-  console.log(value);
-  console.log(review);
+ 
 
   const handleRating = (e, newValue) => {
     setValue(newValue);
@@ -31,7 +30,7 @@ const Review = ({ setVisible,productId}) => {
       product:productId
     }
 
-    console.log(data)
+  
 
     dispatch(addReview(data))
     

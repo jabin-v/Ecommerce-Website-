@@ -28,10 +28,7 @@ const Order = () => {
 
   const orders=useSelector(selectAllOrders);
   const delivered=useSelector(selectDelivered);
-  console.log(delivered)
 
-
-  console.log(orders)
   return (
     <div>
         <Header/>

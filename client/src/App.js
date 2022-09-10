@@ -39,7 +39,7 @@ function App() {
   // dispatchh get iyems
   useEffect(() => {
     if (token) {
-      console.log("token");
+      
       dispatch(fetchCarts());
       dispatch(getTotal());
      
