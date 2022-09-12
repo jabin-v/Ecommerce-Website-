@@ -9,8 +9,10 @@ import axios from "axios";
 import { selectCurrentToken } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../../features/order/orderSlice";
-const BASE_URL = "http://localhost:3500/api/stripe";
+
 const Checkout = () => {
+
+ 
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const token = useSelector(selectCurrentToken);
@@ -24,7 +26,7 @@ const Checkout = () => {
   useEffect(() => {
     const fetchClientSecret = async () => {
       const data = await axios.post(
-        `${BASE_URL}/payment`,
+        `${process.env.REACT_APP_BASEURL}/stripe/payment`,
         {
           amount: cart.cartTotalAmount,
         },

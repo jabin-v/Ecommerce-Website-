@@ -45,11 +45,7 @@ const Price = () => {
         >
           <FormControlLabel control={<Radio />} label="none" value="0-10000000" />
           <FormControlLabel control={<Radio />} label="0-500" value="0-500" />
-          <FormControlLabel
-            control={<Radio />}
-            label="501-1000"
-            value="501-1000"
-          />
+          
           <FormControlLabel
             control={<Radio />}
             label="1000-1500"
@@ -57,13 +53,8 @@ const Price = () => {
           />
           <FormControlLabel
             control={<Radio />}
-            label="2000-2500"
-            value="2000-2500"
-          />
-          <FormControlLabel
-            control={<Radio />}
             label="2000 above"
-            value="2000-100000"
+            value="2000-1000000"
           />
         </RadioGroup>
       </FormControl>

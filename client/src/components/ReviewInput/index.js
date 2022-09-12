@@ -33,7 +33,7 @@ const Review = ({ setVisible,productId}) => {
   
 
     dispatch(addReview(data))
-    
+    dispatch(hideReviewForm())
 
     
     //send to backend

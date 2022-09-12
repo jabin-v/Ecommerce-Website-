@@ -2,7 +2,7 @@
 
 export const authClient = (getState) =>
   axios.create({
-    baseURL: "http://localhost:3500/api",
+    baseURL:process.env.REACT_APP_BASEURL,
     responseType: 'json',
     timeout: 180000,
     headers: {

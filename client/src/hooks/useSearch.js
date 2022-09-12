@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProducts } from "../features/product/productSlice";
 
 
-const BASE_URL = "http://localhost:3500/api/products/search";
+const BASE_URL =`${process.env.REACT_APP_BASEURL}/products/search`
+
 
 const useSearch = () => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Activity from "../../components/activity";
 import Brands from "../../components/brands";
@@ -19,7 +19,8 @@ import Price from "../../components/price";
 import useSearch from "../../hooks/useSearch";
 import Products from "../../components/products";
 import { useLocation, useNavigate } from "react-router-dom";
-import { category } from "../../features/filter/filterSlice";
+import { category, clearFilters, setPage } from "../../features/filter/filterSlice";
+import { selectAllProducts } from "../../features/product/productSlice";
 
 const Search = () => {
   const { data: categories } = useGetCategoriesQuery();
@@ -28,7 +29,13 @@ const Search = () => {
 
   const location = useLocation();
   
-  const { isLoading,products } = useSearch();
+  const { isLoading } = useSearch();
+
+  const products=useSelector(selectAllProducts)
+
+
+
+ 
 
 useEffect(()=>{
 
@@ -39,6 +46,31 @@ useEffect(()=>{
   }
 
 },[location.state])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
@@ -115,13 +147,17 @@ useEffect(()=>{
             </div>
           </div>
 
-          <div className="search-container search-responsive">
+          <div className="search-container search-responsive"   >
             {
-              isLoading ? <p>LOading.......</p> : <Products result={products}/>
+              isLoading ? <p>Loading.......</p> : <Products result={products}/>
             }
+
+{/* <Products result={products}/> */}
            
           </div>
+          
         </div>
+
       </div>
       <Footer />
     </>

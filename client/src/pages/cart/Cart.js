@@ -1,9 +1,6 @@
 import "./cart.css";
-import image1 from "../../images/products/sports-1.jpg";
-import AddIcon from "@mui/icons-material/Add";
-import MinimizeIcon from "@mui/icons-material/Minimize";
-import {useNavigate} from 'react-router-dom';
-// /images/products/sports-1.jpg'
+import { useNavigate } from "react-router-dom";
+
 
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header";
@@ -17,28 +14,23 @@ import {
 } from "../../features/cart/cartSlice";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { Link } from "react-router-dom";
-import Paybutton from "../../components/paybutton/Paybutton";
-import StripeCheckout from "react-stripe-checkout";
 import { selectCurrentToken } from "../../features/auth/authSlice";
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:3500/api';
-
+const BASE_URL = process.env.REACT_APP_BASEURL;
 
 const Cart = () => {
-  const KEY="pk_test_51Lbc37SHvbvS7ni9d15S2L8TSciI1RRzECCfnySKUnnaZO7Ulm4eGcgAzWy8WekYgCdX1GNhdY4ntNhfuMNigep600vVgzxUSu"
+  const KEY = process.env.REACT_APP_STRIPE_KEY;
   const dispatch = useDispatch();
-  const token=useSelector(selectCurrentToken);
+  const token = useSelector(selectCurrentToken);
 
   const [stripeToken, setStripeToken] = useState(null);
 
-  const navigate=useNavigate();
-
-
+  const navigate = useNavigate();
 
   const cart = useSelector(selectCart);
 
-  const cartStats = useSelector((state) => state.cart)
+  const cartStats = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(fetchCarts());
@@ -48,53 +40,31 @@ const Cart = () => {
     dispatch(getTotal());
   }, [cart, dispatch]);
 
-
-
   const handleRemoveCart = (id) => {
-    
-
     dispatch(removeFromCart(id)).unwrap();
   };
 
-
   const onToken = (token) => {
     setStripeToken(token);
-   
   };
   useEffect(() => {
     const makeRequest = async () => {
-      const res=await axios.post(`${BASE_URL}/stripe/payment`,{
-        tokenId:stripeToken.id,
-        amount:2000
-
-
-        
-    },{
-        headers: {
+      const res = await axios.post(
+        `${BASE_URL}/stripe/payment`,
+        {
+          tokenId: stripeToken.id,
+          amount: 2000,
+        },
+        {
+          headers: {
             Authorization: `Bearer ${token}`,
-          }
-    })
+          },
+        }
+      );
+    };
 
-
-    }
-
-    stripeToken && makeRequest()
-      
- 
+    stripeToken && makeRequest();
   }, [stripeToken]);
-
-
-
-
- 
-  
-
-
-
-
-
-
-
 
   return (
     <div>
@@ -105,7 +75,10 @@ const Cart = () => {
             <h1>Your bag</h1>
           </div>
           <div className="top">
-           <Link to="/search"> <button className="cart-btn">Continue shoppping</button> </Link>
+            <Link to="/search">
+              {" "}
+              <button className="cart-btn">Continue shoppping</button>{" "}
+            </Link>
 
             {/* <button className='cart-btn'>Checkout</button> */}
           </div>
@@ -115,35 +88,34 @@ const Cart = () => {
                 <div key={item._id}>
                   <div className="cart-products">
                     <Link to={`/product/${item.product._id}`}>
-                    <div className="cart-product-detail">
-                      <img src={item.product.images[0].url} />
-                      <div className="cart-details">
-                        <span className="cart-product-name">
-                          <b>Product :</b>
-                          {item.product.name}
-                        </span>
-                        <span className="cart-product-id">
-                          <b>ID :</b>789456
-                        </span>
-                        <div className="cart-product-color">
-                          <b>Color:</b>
-                          {"  "}{item.color}
+                      <div className="cart-product-detail">
+                        <img src={item.product.images[0].url} />
+                        <div className="cart-details">
+                          <span className="cart-product-name">
+                            <b>Product :</b>
+                            {item.product.name}
+                          </span>
+                          <span className="cart-product-id">
+                            <b>ID :</b>789456
+                          </span>
+                          <div className="cart-product-color">
+                            <b>Color:</b>
+                            {"  "}
+                            {item.color}
                           </div>
-                        <span className="cart-product-size">
-                          <b>Size :</b>
-                          {item.size}
-                        </span>
+                          <span className="cart-product-size">
+                            <b>Size :</b>
+                            {item.size}
+                          </span>
+                        </div>
                       </div>
-                    </div>
                     </Link>
                     <div style={{ display: "flex" }}>
                       <div className="cart-price-detail">
                         <div className="cart-amount-container">
-                          
                           <div className="cart-product-amount">
                             {item.quantity}
                           </div>
-                          
                         </div>
                         <div className="prod-price">{item.product.price}</div>
                       </div>
@@ -181,11 +153,8 @@ const Cart = () => {
                 </span>
               </div>
               <Link to="/user/cart-checkout">
-             
                 <button className="cart-btn">Check out</button>
-
-                </Link>
-             
+              </Link>
             </div>
           </div>
         </div>

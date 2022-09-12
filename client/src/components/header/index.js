@@ -12,8 +12,11 @@ import useSearch from "../../hooks/useSearch";
 import "./header.css";
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { getTotal, removeOnLogout, selectCart, SelectQunatity } from "../../features/cart/cartSlice";
 
 const Header = ({search,setVisible}) => {
+
+  // const [cart,setCart]=useState(0)
   
   const {
     data: cat,
@@ -29,16 +32,26 @@ const Header = ({search,setVisible}) => {
     
   );
 
+  // const a=useSelector(selectCart);
+
+  // useEffect(()=>{
+    
+  // })
+ 
   const categoryLIst = useSelector(selectAllCategories);
-  const cart = useSelector((state) => state.cart.cartTotalQuantity);
+
+  const items = useSelector(selectCart);
+  const cart=items.length;
+
+
   const token = useSelector(selectCurrentToken);
   const [query, setQuery] = useState("");
   const [open,setOpen]=useState(false);
- 
- 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(cart)
 
   useEffect(() => {
     if (query.length === 0 || query.length > 2) {
@@ -50,10 +63,10 @@ const Header = ({search,setVisible}) => {
   }, [query]);
 
 
-
+  console.log(cart);
 
   const handleClick = (categoryId) => {
- 
+    console.log(categoryId);
 
     dispatch(category([categoryId]));
 
@@ -62,6 +75,7 @@ const Header = ({search,setVisible}) => {
 
   const handleLogout = () => {
     dispatch(logOut());
+    dispatch(removeOnLogout())
     navigate("/");
   };
 

@@ -19,7 +19,7 @@ const Paybutton = ({cartItems}) => {
         
 
    try {
-    const BASE_URL="http://localhost:3500/api/stripe";
+    const BASE_URL= `${process.env.REACT_APP_BASEURL}/stripe`;
     const response= await axios.post(`${BASE_URL}/create-checkout-session`,{
         cartItems
        

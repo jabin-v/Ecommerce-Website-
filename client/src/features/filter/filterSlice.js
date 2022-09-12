@@ -24,7 +24,10 @@ const initialState={
     ratingsAverage:{
         gte:'0',
         lte:'5'
-    }
+    },
+    page:1
+    
+ 
    
 
 }
@@ -61,6 +64,16 @@ const filterSlice=createSlice({
         },
         keyword:(state,action)=>{
             state.keyword=action.payload
+        },
+        clearFilters:(state,action)=>{
+            state=initialState
+        },
+        setProducts:(state,action)=>{
+            state.fileredProduct=state.fileredProduct.concat(action.payload)
+
+        },
+        setPage:(state,action)=>{
+            state.page++
         }
         
 
@@ -71,7 +84,7 @@ const filterSlice=createSlice({
 })
 
 
-export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category,keyword}=filterSlice.actions;
+export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category,keyword,clearFilters,setPage}=filterSlice.actions;
 export default filterSlice.reducer;
 
 

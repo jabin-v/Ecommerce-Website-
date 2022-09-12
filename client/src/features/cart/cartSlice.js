@@ -150,7 +150,8 @@ const cartSlice = createSlice({
       reducer(state, action) {
        
         const existingIndex = state.cartItems.findIndex(
-          (item) => item.product._id === action.payload.product._id
+          (item) => item.product._id === action.payload.product._id && 
+          item.color === action.payload.color && item.size === action.payload.size
         );
 
         if (existingIndex >= 0) {
@@ -179,9 +180,10 @@ const cartSlice = createSlice({
               images: [image1],
               name,
               price,
-              color: addedColor,
-              size: addedSize,
+             
             },
+            color: addedColor,
+            size: addedSize,
             quantity: addedQuantity,
             _id: doc_Id,
           },
@@ -210,6 +212,13 @@ const cartSlice = createSlice({
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
     },
+    removeOnLogout(state,action){
+      state.cartItems= [];
+      state.cartTotalQuantity= 0;
+      state.cartTotalAmount=0 ;
+
+    }
+    
   },
   extraReducers(builder) {
     builder
@@ -247,7 +256,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, changeQuantity, getTotal } = cartSlice.actions;
+export const { addItem, changeQuantity, getTotal,removeOnLogout } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart.cartItems;
 

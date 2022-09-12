@@ -29,10 +29,10 @@ import {
 import { showReviewForm } from "../../features/ui/uiSlice";
 import { selectCurrentToken } from "../../features/auth/authSlice";
 import ImageSlider from "../../components/imageSlider/ImageSlider";
-
+import { useAlert } from 'react-alert'
 const ProductDetail = () => {
   const dispatch = useDispatch();
- 
+  const alert = useAlert()
   let navigate = useNavigate();
   const { singleProduct, isLoading } = useGetProduct();
   const [error, setError] = useState("");
@@ -48,6 +48,18 @@ const ProductDetail = () => {
   const [selectedsize, setSelectedSize] = useState("");
 
   // const[visible,setVisible]=useState(false);
+
+  useEffect(() => {
+    if(visible){
+      document.body.style.overflow = 'hidden';
+
+    }
+    else{
+      document.body.style.overflow = 'unset';
+    }
+ 
+    
+ }, [visible]);
 
   useEffect(() => {
     if (singleProduct) {
@@ -163,6 +175,7 @@ const ProductDetail = () => {
           addedSize
         )
       );
+      alert.show(`${name} added successfully to cart`)
       dispatch(getTotal());
     }
 

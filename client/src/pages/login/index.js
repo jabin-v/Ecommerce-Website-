@@ -19,8 +19,8 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
+    const [user, setUser] = useState('jabinvc');
+    const [pwd, setPwd] = useState('Jabin@1995');
     const [errMsg, setErrMsg] = useState('');
     const navigate=useNavigate();
     const location=useLocation();
@@ -49,6 +49,8 @@ const Login = () => {
             const userData=await login({username:user,password:pwd}).unwrap();
 
             dispatch(setCredentials({...userData,user}));
+            dispatch(fetchCarts());
+            dispatch(getTotal())
            
             setUser('');
             setPwd('');

@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3500/api/products';
+const BASE_URL = `${process.env.REACT_APP_BASEURL}/products`;
+
 
 
 

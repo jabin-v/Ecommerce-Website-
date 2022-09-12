@@ -28,23 +28,16 @@ import { useEffect } from "react";
 import store from "./app/store";
 import { fetchCarts, getTotal } from "./features/cart/cartSlice";
 
+
 const promise = loadStripe(
   "pk_test_51Lbc37SHvbvS7ni9d15S2L8TSciI1RRzECCfnySKUnnaZO7Ulm4eGcgAzWy8WekYgCdX1GNhdY4ntNhfuMNigep600vVgzxUSu"
 );
 
 function App() {
-  const token = useSelector(selectCurrentToken);
-  const dispatch = useDispatch();
+ 
+  
 
-  // dispatchh get iyems
-  useEffect(() => {
-    if (token) {
-      
-      dispatch(fetchCarts());
-      dispatch(getTotal());
-     
-    }
-  }, [token]);
+ 
 
   return (
     <Routes>

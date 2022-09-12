@@ -6,6 +6,7 @@ import './style.css'
 
 const ReviewCard = ({review,user,rating}) => {
   
+  
   return (
    <>
    <div className="review card-1">

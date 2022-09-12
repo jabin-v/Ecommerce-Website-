@@ -15,13 +15,16 @@ export const productSlice=createSlice({
     reducers:{
         addProducts(state,action){
             state.filteredProduct=action.payload
+        },
+        conactProducts(state,action){
+            state.filteredProduct=  state.filteredProduct.concat(action.payload)
         }
         
     },
 
 })
 
-export const { addProducts } = productSlice.actions;
+export const { addProducts,conactProducts } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.products.filteredProduct;
 

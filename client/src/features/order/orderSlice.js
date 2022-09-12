@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const ORDER_URL = "http://localhost:3500/api/order";
+const ORDER_URL =`${process.env.REACT_APP_BASEURL}/order`
+
+// "http://localhost:3500/api/order";
 
 const initialState={
     orders:[],
