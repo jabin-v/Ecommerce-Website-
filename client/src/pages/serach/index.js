@@ -7,7 +7,7 @@ import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Ratings from "../../components/Rating";
 import Size from "../../components/size";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import {
   selectAllCategories,
   useGetCategoriesQuery,
@@ -19,62 +19,29 @@ import Price from "../../components/price";
 import useSearch from "../../hooks/useSearch";
 import Products from "../../components/products";
 import { useLocation, useNavigate } from "react-router-dom";
-import { category, clearFilters, setPage } from "../../features/filter/filterSlice";
+import {
+  category,
+  clearFilters,
+  setPage,
+} from "../../features/filter/filterSlice";
 import { selectAllProducts } from "../../features/product/productSlice";
 
 const Search = () => {
   const { data: categories } = useGetCategoriesQuery();
   const categoryLIst = useSelector(selectAllCategories);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const location = useLocation();
-  
+
   const { isLoading } = useSearch();
 
-  const products=useSelector(selectAllProducts)
+  const products = useSelector(selectAllProducts);
 
-
-
- 
-
-useEffect(()=>{
-
-  if(location.state){
-
-    dispatch(category([location.state.catId]))
-   
-  }
-
-},[location.state])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
+  useEffect(() => {
+    if (location.state) {
+      dispatch(category([location.state.catId]));
+    }
+  }, [location.state]);
 
   const [visible, setVisible] = useState(false);
 
@@ -86,14 +53,11 @@ useEffect(()=>{
 
   return (
     <>
-      <Header search setVisible={setVisible}  />
+      <Header search setVisible={setVisible} />
       <div className="product-container">
         <div className="container">
           <div className="sidebar has-scrollbar" style={styles.sidebar}>
-            <div
-              className="sidebar-section"
-              style={{ height: "100vh" }}
-            >
+            <div className="sidebar-section" style={{ height: "100vh" }}>
               <div className="sidebar-top">
                 <h2 className="sidebar-title" style={{ fontWeight: "600" }}>
                   filters
@@ -101,9 +65,9 @@ useEffect(()=>{
 
                 <button
                   className="sidebar-close-btn"
-                  onClick={()=>setVisible(false)}
+                  onClick={() => setVisible(false)}
                 >
-                  <CloseIcon/>
+                  <CloseIcon />
                 </button>
               </div>
               <div className="sidebar-bottom">
@@ -147,17 +111,12 @@ useEffect(()=>{
             </div>
           </div>
 
-          <div className="search-container search-responsive"   >
-            {
-              isLoading ? <p>Loading.......</p> : <Products result={products}/>
-            }
+          <div className="search-container search-responsive">
+            {isLoading ? <p>Loading.......</p> : <Products result={products} />}
 
-{/* <Products result={products}/> */}
-           
+            {/* <Products result={products}/> */}
           </div>
-          
         </div>
-
       </div>
       <Footer />
     </>

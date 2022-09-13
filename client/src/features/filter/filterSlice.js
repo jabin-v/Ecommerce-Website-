@@ -25,7 +25,8 @@ const initialState={
         gte:'0',
         lte:'5'
     },
-    page:1
+    page:1 ,
+   
     
  
    
@@ -44,7 +45,7 @@ const filterSlice=createSlice({
             state.price= {...state.price,gte:action.payload || 0}
           },
         lessThanPrice: (state, action) => {
-            state.price= {...state.price,lte:action.payload || 10000}
+            state.price= {...state.price,lte:action.payload || 100000}
           },
         color: (state, action) => {
             state.colors.in= action.payload
@@ -73,7 +74,10 @@ const filterSlice=createSlice({
 
         },
         setPage:(state,action)=>{
-            state.page++
+            state.page=action.payload
+        },
+        resetPage:(state,action)=>{
+            state.page=1
         }
         
 
@@ -84,7 +88,7 @@ const filterSlice=createSlice({
 })
 
 
-export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category,keyword,clearFilters,setPage}=filterSlice.actions;
+export const {greaterThanPrice,lessThanPrice,color,brand,activity,rating,category,keyword,clearFilters,setPage,resetPage}=filterSlice.actions;
 export default filterSlice.reducer;
 
 
