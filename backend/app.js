@@ -1,4 +1,7 @@
+
+const {createServer}=require("http");
 require('dotenv').config();
+const {Server}=require("socket.io")
 const express=require("express");
 const mongoose=require("mongoose");
 const app=express();
@@ -35,17 +38,25 @@ const corsOptions = require("./config/corsOptions");
 const credentials = require("./middlewares/credentials");
 const  verifyToken = require('./middlewares/verifyToken');
 const  globalErrorHandler = require('./controllers/errorController');
-
-
-//Hanlde optiond credentials check -before CORS
-//and fetch cookies credential requirement
-
-app.use(credentials)
-
-
+const allowedOrigins = require("./config/allowedOrigins");
 
 // cross origin resource sharing
 app.use(cors(corsOptions));
+//Hanlde optiond credentials check -before CORS
+//and fetch cookies credential requirement
+app.use(credentials)
+
+const httpServer=createServer(app);
+
+global.io=new Server(httpServer,{
+  cors:{
+    origin:allowedOrigins
+  }
+})
+
+
+
+
 
 
 app.use( bodyParser.json({limit: '50mb'}))
@@ -79,6 +90,114 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+// ================listening to client messages=====================
+
+const admins=[];
+let activeChats=[]
+
+const get_random=(array)=>{
+  return array[Math.floor(Math.random() * array.length)];
+
+
+}
+io.on("connection",(socket)=>{
+
+   //@@@@@@@@@listening admin connected
+
+   socket.on("admin connected with the server",(adminName)=>{
+
+    
+    admins.push({id:socket.id,admin:adminName});
+    console.log("admins",admins)
+   })
+
+
+   //@@@@@@@@@@@listeing for client message@@@@@@@@@@@@@
+
+
+  socket.on("client sends message",(msg)=>{
+    console.log(msg)
+    if(admins.length ===0){
+      socket.emit("no admin","");
+
+    }else{
+
+      let client=activeChats.find((client)=>client.clientId === socket.id);
+      let targetAdmin;
+
+      if(client){
+        targetAdmin=client.adminId
+      }else{
+        let admin=get_random(admins)
+
+        activeChats.push({clientId:socket.id,adminId:admin.id});
+        targetAdmin=admin.id
+      }
+
+      console.log("targetAdmin",targetAdmin)
+      console.log("client",socket.id)
+
+      socket.broadcast.emit("server sends message from client to admin",{
+        user:socket.id,
+        message:msg,
+      })
+
+    }
+   
+  })
+
+   // @@@@@@@@@@@@@@ listening ==admin to client message @@@@@@@@@@@@@@@//
+
+  socket.on("admin sends message to client",({user,message})=>{
+    socket.broadcast.to(user).emit("server sends message from admin to client",{
+
+   
+      message
+    })
+
+   
+  })
+
+
+
+
+
+  socket.on("disconnect",(reason)=>{
+
+    console.log("disconnected ")
+    const removeIndex=admins.findIndex((item)=>item.id === socket.id);
+
+    if(removeIndex !== -1){
+      admins.splice(removeIndex,1)
+    }
+
+    //client disconnected
+
+    activeChats=activeChats.filter((item)=>item.adminId !==socket.id);
+
+    const removeIndexClient=activeChats.findIndex((item)=>item.id === socket.id);
+
+    if(removeIndexClient !== -1){
+
+      activeChats.splice(removeIndex,1)
+
+    }
+
+    socket.broadcast.emit("disconnected",{reason:reason,socketId:socket.id})
+
+
+  })
+
+ 
+
+ 
+
+
+
+})
+
+
+
 
 app.use('/api/register',registerRoute);
 app.use('/api/auth', authRoute);
@@ -86,7 +205,7 @@ app.use('/api/refresh',refreshRouter)
 app.use('/api/logout',logoutRouter)
 app.use('/api/products', productRouter);
 app.use('/api/category', categoryRouter);
-app.use('/api/users', userRouter);
+
 
 
 
@@ -103,8 +222,9 @@ app.use('/api/users', userRouter);
 
 
 app.use(verifyToken);
-app.use('/api/employees',employeesRouter );
+
 app.use('/api/cart',cartRouter);
+app.use('/api/users', userRouter);
 app.use('/api/upload',uploadImageRouter);
 app.use('/api/order',orderRouter);
 app.use('/api/stripe', stripeRouter);
@@ -115,10 +235,7 @@ app.use('/api/reviews',reviewRouter);
 
 
 
-// app.use('/api/users', userRouter);
-// app.use('/api/category', categoryRouter);
 
-// app.use('/api/cart',cartRouter); add back after check
 
 
 
@@ -126,10 +243,7 @@ app.use('/api/reviews',reviewRouter);
 app.all("*",(req,res,next)=>{
   
 
-    // const err=new Error(`can't find ${req.originalUrl}`);
-    // err.status='fail',
-    // err.statusCode=404;
-    // next(err);
+  
    next(new AppError(`can't find ${req.originalUrl}`,404))
 })
 
@@ -140,7 +254,7 @@ app.use(globalErrorHandler)
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
 // oLyKANI2tGAUeIaO

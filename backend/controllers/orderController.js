@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Order = require("../model/Order");
 const User = require("../model/User");
-const APIFeatures = require("../util/APIFeatures");
 const catchAsync = require("../util/catchAsync");
 const moment = require("moment");
 const Product = require("../model/Product");
+
 
 const createOrder = catchAsync(async (req, res, next) => {
   const username = req.user; //   ;req.user;
@@ -61,7 +61,7 @@ const getOrderByuser = catchAsync(async (req, res, next) => {
 const getDelivered = catchAsync(async (req, res, next) => {
   const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
-  const date = new Date(2022 - 08 - 31);
+  // const date = new Date(2022 - 08 - 31);
 
  
 
@@ -94,7 +94,7 @@ const AllDelivered = catchAsync(async (req, res, next) => {
 
   const username = req.user; //   ;req.user;
   const userId = await User.findOne({ username }).select("_id").exec();
-  const date = new Date(2022 - 08 - 31);
+  // const date = new Date(2022 - 08 - 31);
 
   const orders = await Order.aggregate([
     {
@@ -145,6 +145,7 @@ const stats = catchAsync(async (req, res, next) => {
     {
       $match: { "orderItems.deliveryStatus": { $ne: "delivered" } },
     },
+    
   ]);
 
   res.status(200).json(stats);

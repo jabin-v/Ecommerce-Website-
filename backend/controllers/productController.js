@@ -88,6 +88,8 @@ const aliasFeaturedProduct = catchAsync(async (req, res, next) => {
 
 const getAllProductsCustomer = catchAsync(async (req, res, next) => {
 
+  console.log(req.query)
+
   
 
   

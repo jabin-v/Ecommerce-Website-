@@ -218,6 +218,19 @@ img{
 strong{
     font-weight:var(--fw8)
 }
+textarea {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none; /*remove the resize handle on the bottom right*/
+    width:100%;
+    /* background-color:var(--cultured); */
+}
 
 table{
     border-collapse:collapse;

@@ -1,4 +1,9 @@
 const express = require("express");
+const  verifyToken = require('../../middlewares/verifyToken');
+const ROLES_LIST = require('../../config/roles_list');
+const verifyRoles = require('../../middlewares/verifyRoles');
+
+
 const productController = require("../../controllers/productController");
 const reviewRouter = require("../../routes/api/review");
 
@@ -24,13 +29,13 @@ router.route("/search").get(productController.getAllProductsCustomer);
 
 router
   .route("/")
-  .post(productController.createProduct)
-  .get(productController.getAllProducts)
-  .delete(productController.deleteProduct)
-  .put(productController.updateProduct)
+  .post(verifyToken,verifyRoles(ROLES_LIST.Admin), productController.createProduct)
+  .get(verifyToken,verifyRoles(ROLES_LIST.Admin),productController.getAllProducts)
+  .delete(verifyToken,verifyRoles(ROLES_LIST.Admin),productController.deleteProduct)
+  .put(verifyToken,verifyRoles(ROLES_LIST.Admin),productController.updateProduct)
   
   router.route("/removeimage")
-  .patch(productController.removeImage) 
+  .patch(verifyToken,verifyRoles(ROLES_LIST.Admin),productController.removeImage) 
 
 router.route("/:id")
 .get(productController.getProductById)
