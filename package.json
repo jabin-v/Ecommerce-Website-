@@ -4,12 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "install-server": "npm install --prefix backend",
-    "install-client": "npm install --prefix client",
-    "install": "npm run install-server && npm run install-client",
-    "server":"npm run watch --prefix backend",
-    "client":"npm start --prefix client",
-    "watch":"npm run server & npm run client",
     "start":"npm run start --prefix backend",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend",
 
