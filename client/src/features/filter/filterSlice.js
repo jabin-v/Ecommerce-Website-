@@ -43,28 +43,39 @@ const filterSlice=createSlice({
         
         greaterThanPrice: (state, action) => {
             state.price= {...state.price,gte:action.payload || 0}
+            state.page=1
           },
         lessThanPrice: (state, action) => {
             state.price= {...state.price,lte:action.payload || 100000}
+            state.page=1
           },
         color: (state, action) => {
             state.colors.in= action.payload
+            state.page=1
           },
         brand: (state, action) => {
+
+           
             state.brand= action.payload
+            state.page=1
           },
         activity: (state, action) => {
             state.activity.in= action.payload
+            
+            state.page=1
           },
         rating:(state,action)=>{
             state.ratingsAverage={...state.ratingsAverage,gte:action.payload}
+            state.page=1
 
         },
         category:(state,action)=>{
             state.category= action.payload
+            state.page=1
         },
         keyword:(state,action)=>{
             state.keyword=action.payload
+            state.page=1
         },
         clearFilters:(state,action)=>{
             state=initialState
@@ -74,6 +85,7 @@ const filterSlice=createSlice({
 
         },
         setPage:(state,action)=>{
+            console.log(action.payload)
             state.page=action.payload
         },
         resetPage:(state,action)=>{

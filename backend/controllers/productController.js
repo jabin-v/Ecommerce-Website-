@@ -103,9 +103,15 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
     .filter()
     .sort()
     .limit()
-    .paginate();
+    
 
-  const products = await features.query;
+  let products = await features.query;
+
+  let filteredProductsCount = products.length;
+
+  features.paginate();
+
+  products = await features.query.clone();
 
 
 
@@ -117,8 +123,10 @@ const getAllProductsCustomer = catchAsync(async (req, res, next) => {
     status: "success",
     result: products.length,
     data: products,
+    filteredProductsCount,
+    resultPerPage:20
   });
-});
+});0
 
 const getProductById = catchAsync(async (req, res, next) => {
   const product = await Product.findById(req.params.id)

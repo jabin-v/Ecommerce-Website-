@@ -30,6 +30,7 @@ const Cart = () => {
 
   const cart = useSelector(selectCart);
 
+
   const cartStats = useSelector((state) => state.cart);
 
   useEffect(() => {
@@ -66,6 +67,8 @@ const Cart = () => {
     stripeToken && makeRequest();
   }, [stripeToken]);
 
+
+
   return (
     <div>
       <Header />
@@ -82,7 +85,9 @@ const Cart = () => {
 
             {/* <button className='cart-btn'>Checkout</button> */}
           </div>
-          <div className="bottom">
+          {
+            cart.length === 0 ? <p>Currenlty  your bag is empty </p> : (
+              <div className="bottom">
             <div className="cart-product-info">
               {cart.map((item) => (
                 <div key={item._id}>
@@ -136,20 +141,20 @@ const Cart = () => {
               <div className="title">Order summary</div>
               <div className="summary-item">
                 <span className="summary-item-text">Sub total</span>
-                <span className="summary-item-price">$80</span>
+                <span className="summary-item-price">₹ {cartStats.cartTotalAmount}</span>
               </div>
               <div className="summary-item">
-                <span className="summary-item-text">Estimated shipping</span>
-                <span className="summary-item-price">$5.90</span>
+                <span className="summary-item-text">Delivery with in</span>
+                <span className="summary-item-price" style={{color:"green"}}>3 Days</span>
               </div>
               <div className="summary-item">
-                <span className="summary-item-text">Shipping discount</span>
-                <span className="summary-item-price">$-5.90</span>
+                <span className="summary-item-text">Shipping charge</span>
+                <span className="summary-item-price">0</span>
               </div>
               <div className="summary-item total">
                 <span className="summary-item-text">Total</span>
                 <span className="summary-item-price">
-                  {cartStats.cartTotalAmount}
+                ₹ {cartStats.cartTotalAmount}
                 </span>
               </div>
               <Link to="/user/cart-checkout">
@@ -157,6 +162,8 @@ const Cart = () => {
               </Link>
             </div>
           </div>
+            )
+          }
         </div>
       </div>
       <Footer />

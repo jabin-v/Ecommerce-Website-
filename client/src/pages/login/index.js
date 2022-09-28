@@ -19,7 +19,7 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('jabinvc');
+    const [user, setUser] = useState('jabinv1995');
     const [pwd, setPwd] = useState('Jabin@1995');
     const [errMsg, setErrMsg] = useState('');
     const navigate=useNavigate();

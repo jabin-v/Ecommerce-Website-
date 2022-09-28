@@ -51,19 +51,22 @@ const Header = ({search,setVisible}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(cart)
+  
 
-  useEffect(() => {
+
+  const handleSearchClick=()=>{
+
     if (query.length === 0 || query.length > 2) {
 
       dispatch(keyword(query))
 
 
     }
-  }, [query]);
+
+  }
 
 
-  console.log(cart);
+
 
   const handleClick = (categoryId) => {
     console.log(categoryId);
@@ -128,7 +131,7 @@ const Header = ({search,setVisible}) => {
               />
 
               <button className="search-btn">
-               <SearchIcon/>
+               <SearchIcon onClick={handleSearchClick}/>
               </button>
             </div>:<div></div>
             }

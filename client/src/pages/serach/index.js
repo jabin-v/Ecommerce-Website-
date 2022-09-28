@@ -25,6 +25,9 @@ import {
   setPage,
 } from "../../features/filter/filterSlice";
 import { selectAllProducts } from "../../features/product/productSlice";
+import Pagination from "../../components/pagination/Pagination";
+
+import { FidgetSpinner } from "react-loader-spinner";
 
 const Search = () => {
   const { data: categories } = useGetCategoriesQuery();
@@ -112,9 +115,28 @@ const Search = () => {
           </div>
 
           <div className="search-container search-responsive">
-            {isLoading ? <p>Loading.......</p> : <Products result={products} />}
+            {isLoading ? (
+              <div className="loader">
+                <FidgetSpinner
+                visible={true}y
+                height="80"
+                width="80"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass="dna-wrapper"
+                ballColors={["#ff0000", "#00ff00", "#0000ff"]}
+                backgroundColor="yellow"
+              />
+              </div>
+              
+            ) : (
+              <Products result={products} />
+            )}
 
-            {/* <Products result={products}/> */}
+            <Pagination
+              total={products.filteredProductsCount}
+              limit={products.resultPerPage}
+            />
           </div>
         </div>
       </div>

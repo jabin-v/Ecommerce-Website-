@@ -6,7 +6,7 @@ const Products = ({result}) => {
   return (
     <div className='product-grid'>
           {
-                result.map((product)=>(
+                result.data.map((product)=>(
                     <ShowCaseCard
                     key={product._id}
                     name={product.name}

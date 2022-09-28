@@ -45,6 +45,12 @@
         color:var(--salmon-pink)
     }
 
+    .loader{
+    position:absolute;
+    top:20%;
+    left:60%;
+    
+    }
    
  @media (max-width:479px) {
     .search-responsive .product-grid{
