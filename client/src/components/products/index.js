@@ -3,6 +3,8 @@ import ShowCaseCard from '../showcaseCard/ShowCaseCard';
 import './style.css'
 
 const Products = ({result}) => {
+  if(result.data.length ===  0 ){return <p>No Products found try changing filters</p>}
+  
   return (
     <div className='product-grid'>
           {
