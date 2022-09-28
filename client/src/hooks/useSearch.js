@@ -23,25 +23,44 @@ const useSearch = () => {
     delete p1.colors;
   }
 
-  const getProducts = (signal) => {
+  // const getProducts = (signal) => {
+  //   setIsLoading(true);
+
+  //   axios
+  //     .get(`${BASE_URL}`, {
+  //       params: p1,
+  //       signal
+        
+  //     })
+  //     .then(({ data }) => {
+
+        
+  //       dispatch(addProducts(data));
+
+  //       setIsLoading(false);
+  //     });
+  // };
+
+  useEffect(() => {
+    let abortController = new AbortController();
+      const getProducts = (signal) => {
     setIsLoading(true);
 
     axios
       .get(`${BASE_URL}`, {
         params: p1,
-        signal
+        signal:abortController.signal
         
       })
       .then(({ data }) => {
+
+        
         dispatch(addProducts(data));
 
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    let abortController = new AbortController();
-    getProducts(abortController.signal,);
+    getProducts();
 
     return () => {
       abortController.abort();
@@ -50,6 +69,7 @@ const useSearch = () => {
 
   return {
     isLoading,
+    
   };
 };
 

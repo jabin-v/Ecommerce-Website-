@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 import Footer from '../../components/footer'
 import Header from '../../components/header'
-import AddIcon from "@mui/icons-material/Add";
-import MinimizeIcon from "@mui/icons-material/Minimize";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
-import Progressbar from '../../components/progressbar/Progressbar'
 import './style.css'
 import OrderDetail from '../../components/orderDetail';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +23,7 @@ const Order = () => {
 
   const orders=useSelector(selectAllOrders);
   const delivered=useSelector(selectDelivered);
+
 
   return (
     <div>

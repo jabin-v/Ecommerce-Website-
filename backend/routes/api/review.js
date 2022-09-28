@@ -1,17 +1,18 @@
 const express=require('express');
 const reviewController = require('../../controllers/reviewController');
+const verifyToken = require('../../middlewares/verifyToken');
 
 const router=express.Router({mergeParams:true});
 
 
 router.route('/')
-     .post(reviewController.createReview)
-     .get(reviewController.getAllReview)
+     .post(verifyToken,reviewController.createReview)
+     .get(verifyToken,reviewController.getAllReview)
 
 
      router.route('/:id')
-     .patch(reviewController.updateReview)
-     .delete(reviewController.deleteReview)
+     .patch(verifyToken,reviewController.updateReview)
+     .delete(verifyToken,reviewController.deleteReview)
      
 
 

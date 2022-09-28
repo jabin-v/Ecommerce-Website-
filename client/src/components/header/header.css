@@ -56,8 +56,9 @@
     text-align:center;
     line-height:10px;
     color:var(--bittersweet);
-    top:2px;
+    top:-9px;
     left:14px;
+    font-size:15px;
     /* background:gray; */
     /* padding:20px */
 }

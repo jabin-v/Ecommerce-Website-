@@ -22,7 +22,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   category,
   clearFilters,
-  setPage,
 } from "../../features/filter/filterSlice";
 import { selectAllProducts } from "../../features/product/productSlice";
 import Pagination from "../../components/pagination/Pagination";
@@ -54,17 +53,25 @@ const Search = () => {
     },
   };
 
+  const handleClearFilters=()=>{
+   
+    dispatch(clearFilters())
+  }
+
   return (
     <>
       <Header search setVisible={setVisible} />
       <div className="product-container">
         <div className="container">
           <div className="sidebar has-scrollbar" style={styles.sidebar}>
-            <div className="sidebar-section" style={{ height: "100vh" }}>
+            <div className="sidebar-section" style={{ height: "100vh" }}>              
               <div className="sidebar-top">
+               
                 <h2 className="sidebar-title" style={{ fontWeight: "600" }}>
                   filters
                 </h2>
+                
+             
 
                 <button
                   className="sidebar-close-btn"

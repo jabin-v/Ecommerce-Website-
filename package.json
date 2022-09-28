@@ -1,8 +1,8 @@
 {
-  "name": "ecomrtk",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "install-server": "npm install --prefix backend",
     "install-client": "npm install --prefix client",
@@ -10,9 +10,32 @@
     "server":"npm run watch --prefix backend",
     "client":"npm start --prefix client",
     "watch":"npm run server & npm run client",
+    "start":"npm run start --prefix backend",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.30.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "mongoose": "^6.5.0",
+    "nodemon": "^2.0.19",
+    "react-stripe-checkout": "^2.6.3",
+    "slugify": "^1.6.5",
+    "socket.io": "^4.5.2",
+    "stripe": "^10.6.0"
+  }
 }
+
+
+

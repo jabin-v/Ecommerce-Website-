@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut, selectCurrentToken } from "../../features/auth/authSlice";
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   selectAllCategories,
   useGetCategoriesQuery,
 } from "../../features/category/categoryApiSlice";
 import { category, keyword } from "../../features/filter/filterSlice";
-import useSearch from "../../hooks/useSearch";
 import "./header.css";
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { getTotal, removeOnLogout, selectCart, SelectQunatity } from "../../features/cart/cartSlice";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = ({search,setVisible}) => {
 
@@ -56,12 +57,15 @@ const Header = ({search,setVisible}) => {
 
   const handleSearchClick=()=>{
 
-    if (query.length === 0 || query.length > 2) {
+    if ( query.length >= 2) {
 
       dispatch(keyword(query))
+      
+
 
 
     }
+    
 
   }
 
@@ -189,7 +193,7 @@ const Header = ({search,setVisible}) => {
           <div className="wrapper flexitem">
         {
          search &&  <span className="trigger desktop-hide" onClick={()=>setVisible(true)} style={{cursor:"pointer"}}> 
-          <i className="ri-menu-line"></i>
+          <MenuIcon/>
             </span>
         }   
              
@@ -213,7 +217,7 @@ const Header = ({search,setVisible}) => {
                 <li>
                   <Link to="/user/cart" className="iscart">
                     <div className="icon-large">
-                      <i className="ri-shopping-cart-line"></i>
+                     <ShoppingCartIcon/>
 
                       <div className="fly-item">
                         <span className="item-number">{cart}</span>

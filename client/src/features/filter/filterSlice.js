@@ -78,14 +78,14 @@ const filterSlice=createSlice({
             state.page=1
         },
         clearFilters:(state,action)=>{
-            state=initialState
+            return initialState;
+            
         },
         setProducts:(state,action)=>{
             state.fileredProduct=state.fileredProduct.concat(action.payload)
 
         },
         setPage:(state,action)=>{
-            console.log(action.payload)
             state.page=action.payload
         },
         resetPage:(state,action)=>{

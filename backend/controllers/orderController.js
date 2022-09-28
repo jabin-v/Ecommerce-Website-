@@ -87,6 +87,8 @@ const getDelivered = catchAsync(async (req, res, next) => {
     { $limit: 10 },
   ]);
 
+ 
+
   res.status(200).json(orders);
 });
 const AllDelivered = catchAsync(async (req, res, next) => {
