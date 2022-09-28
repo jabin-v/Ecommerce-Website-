@@ -8,7 +8,7 @@ const createReview=catchAsync(async(req,res,next)=>{
 
     const username = req.user; //   ;req.user;
 
-    console.log("user is",req.user)
+   
 
     const userId = await User.findOne({ username }).select("_id").exec();
 

@@ -6,7 +6,7 @@ const User = require("../model/User");
 const getCart = catchAsync(async (req, res, next) => {
   ///================//
 
-  console.log(req.user)
+  
   const username = req.user; //   ;req.user;
 
   const userId = await User.findOne({ username }).select("_id").exec();
@@ -35,7 +35,7 @@ const getCart = catchAsync(async (req, res, next) => {
 });
 
 const addToCart = catchAsync(async (req, res, next) => {
- console.log("cart adding")
+ 
 
   const username = req.user; //   ;req.user;
   
@@ -116,7 +116,6 @@ const removeCart = catchAsync(async (req, res, next) => {
   const userId = await User.findOne({ username }).select("_id").exec();
   // const { data } =req.body.payload;
 
-  console.log(req.body.data)
   if (req.body.data) {
     const result = await Cart.findOneAndUpdate(
       { user: userId },

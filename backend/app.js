@@ -13,6 +13,7 @@ const AppError =require('./util/appError')
 const PORT = process.env.PORT || 3500;
 const connectDB = require('./config/mongoConnection');
 const fileUpload=require("express-fileupload")
+const path=require('path');
 
 //Connect to mongodb
 connectDB();
@@ -90,6 +91,8 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+app.use(express.static(path.join(__dirname,"public")))
+
 // ================listening to client messages=====================
 
 const admins=[];
@@ -108,7 +111,7 @@ io.on("connection",(socket)=>{
 
     
     admins.push({id:socket.id,admin:adminName});
-    console.log("admins",admins)
+    
    })
 
 
@@ -116,7 +119,7 @@ io.on("connection",(socket)=>{
 
 
   socket.on("client sends message",(msg)=>{
-    console.log(msg)
+  
     if(admins.length ===0){
       socket.emit("no admin","");
 
@@ -134,8 +137,7 @@ io.on("connection",(socket)=>{
         targetAdmin=admin.id
       }
 
-      console.log("targetAdmin",targetAdmin)
-      console.log("client",socket.id)
+      
 
       socket.broadcast.emit("server sends message from client to admin",{
         user:socket.id,
@@ -164,7 +166,7 @@ io.on("connection",(socket)=>{
 
   socket.on("disconnect",(reason)=>{
 
-    console.log("disconnected ")
+   
     const removeIndex=admins.findIndex((item)=>item.id === socket.id);
 
     if(removeIndex !== -1){
@@ -253,7 +255,7 @@ app.use(globalErrorHandler)
 
 
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
+   
     httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 

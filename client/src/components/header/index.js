@@ -69,7 +69,7 @@ const Header = ({search,setVisible}) => {
 
 
   const handleClick = (categoryId) => {
-    console.log(categoryId);
+   
 
     dispatch(category([categoryId]));
 

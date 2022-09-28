@@ -7,7 +7,7 @@ const Recommended = ({product}) => {
 
     const products = useGetRecommendedProducts(product);
 
-    console.log(products)
+   
     
 
   return (

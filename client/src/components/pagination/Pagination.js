@@ -13,7 +13,7 @@ const Pagination = ({ total, limit}) => {
 
 	const onClick = (newPage) => {
 
-        console.log(newPage+1)
+       
 
         dispatch(setPage(newPage + 1))
 		
