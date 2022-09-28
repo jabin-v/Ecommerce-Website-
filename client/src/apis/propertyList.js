@@ -1,5 +1,5 @@
 import axios from 'axios';
- const BASE_URL="http://localhost:3500/api/products/";
+ const BASE_URL=`${process.env.REACT_APP_BASEURL}/products`
 
 
  export default axios.create({
