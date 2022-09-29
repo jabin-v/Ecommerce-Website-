@@ -5,7 +5,8 @@ import axios from 'axios';
 
 
 const PRODUCTS_COUNT = 4;
-const BASE_URL = 'http://localhost:3500/api/products/search';
+const BASE_URL = `${process.env.REACT_APP_BASEURL}/api/products/search` 
+
 
 const getRandomIndex = (max, min = 0) => {
     return Math.floor(Math.random() * (max - min) + min);
