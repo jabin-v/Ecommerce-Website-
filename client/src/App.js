@@ -1,4 +1,4 @@
-import "./App.css";
+import "./app.css";
 import Login from "./pages/login";
 
 import Register from "./pages/register";
