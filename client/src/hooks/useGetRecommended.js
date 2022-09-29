@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const PRODUCTS_COUNT = 4;
-const BASE_URL = `${process.env.REACT_APP_BASEURL}/api/products/search` 
+const BASE_URL = `${process.env.REACT_APP_BASEURL}/products/search` 
 
 
 const getRandomIndex = (max, min = 0) => {
