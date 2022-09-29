@@ -9,7 +9,7 @@ import Private from "./components/Private";
 import Unauthorized from "./components/Unauthorized";
 import RequireAuth from "./features/auth/RequireAuth";
 import UsersList from "./features/users/UsersList";
-import "./App.css";
+
 import ProductDetail from "./pages/pooductDetail.js";
 import Cart from "./pages/cart/Cart";
 import Search from "./pages/serach";
