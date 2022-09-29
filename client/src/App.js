@@ -3,7 +3,6 @@ import Register from "./pages/register";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/home";
-import "remixicon/fonts/remixicon.css";
 
 import Public from "./components/Public";
 import Private from "./components/Private";
